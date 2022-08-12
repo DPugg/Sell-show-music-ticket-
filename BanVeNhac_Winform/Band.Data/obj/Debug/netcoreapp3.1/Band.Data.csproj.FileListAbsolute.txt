@@ -1,0 +1,14 @@
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\bin\Debug\netcoreapp3.1\Band.Data.dll.config
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\bin\Debug\netcoreapp3.1\Band.Data.deps.json
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\bin\Debug\netcoreapp3.1\Band.Data.runtimeconfig.json
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\bin\Debug\netcoreapp3.1\Band.Data.runtimeconfig.dev.json
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\bin\Debug\netcoreapp3.1\Band.Data.dll
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\bin\Debug\netcoreapp3.1\Band.Data.pdb
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\obj\Debug\netcoreapp3.1\Band.Data.csproj.AssemblyReference.cache
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\obj\Debug\netcoreapp3.1\Band.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\obj\Debug\netcoreapp3.1\Band.Data.AssemblyInfoInputs.cache
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\obj\Debug\netcoreapp3.1\Band.Data.AssemblyInfo.cs
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\obj\Debug\netcoreapp3.1\Band.Data.csproj.CoreCompileInputs.cache
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\obj\Debug\netcoreapp3.1\Band.Data.dll
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\obj\Debug\netcoreapp3.1\Band.Data.pdb
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.Data\obj\Debug\netcoreapp3.1\Band.Data.genruntimeconfig.cache

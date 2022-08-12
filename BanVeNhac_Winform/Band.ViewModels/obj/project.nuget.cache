@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "WMhZ/1bfq2uzD5/yRsQgRtS9KYaZc6pFkjbQBNZVi/emA+EdPmqZR2OBw2DglTK94oD21YEHvTkXenigBfIAGw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.ViewModels\\Band.ViewModels.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\maima\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\maima\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\maima\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

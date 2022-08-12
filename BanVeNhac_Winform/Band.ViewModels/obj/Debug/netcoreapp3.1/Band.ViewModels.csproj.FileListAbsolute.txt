@@ -1,0 +1,10 @@
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\bin\Debug\netcoreapp3.1\Band.ViewModels.deps.json
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\bin\Debug\netcoreapp3.1\Band.ViewModels.dll
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\bin\Debug\netcoreapp3.1\Band.ViewModels.pdb
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\obj\Debug\netcoreapp3.1\Band.ViewModels.csproj.AssemblyReference.cache
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\obj\Debug\netcoreapp3.1\Band.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\obj\Debug\netcoreapp3.1\Band.ViewModels.AssemblyInfoInputs.cache
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\obj\Debug\netcoreapp3.1\Band.ViewModels.AssemblyInfo.cs
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\obj\Debug\netcoreapp3.1\Band.ViewModels.csproj.CoreCompileInputs.cache
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\obj\Debug\netcoreapp3.1\Band.ViewModels.dll
+C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ViewModels\obj\Debug\netcoreapp3.1\Band.ViewModels.pdb
