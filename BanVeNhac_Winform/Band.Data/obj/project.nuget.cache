@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HoIytx/R6AyEVsCvvCr/qhwwId2lUx6n/YgjROn6CP4IvhK/PNRyzuiBT0OnPiYRaP9RAuc1j88rwiWkJV6msw==",
+  "dgSpecHash": "ZZY7x1bq8k4ywJ6MCXSnMCjHYk2x+mGOh1S75Z915kOcY6ADWghwpve6XJBr4EbBSjG0S3XbGLAOeEaWEYv4MQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.Data\\Band.Data.csproj",
+  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.Data\\Band.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maima\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\maima\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

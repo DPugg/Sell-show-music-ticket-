@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZzvZDtTPNzMwdbaSYAP9+jlLXffRJ+MSBTxh/ZcK3MkwK1uBUnTJc7ZnVtsbilHqJPy+Q14Jkjp9L+bTG3w3iQ==",
+  "dgSpecHash": "Y7ERr/5RIiWlHu6GLTSMqGgz9LpwyEWirGAh+ucjcBBEexXT/QrAPnVJG8jb7u7ZI6GnPKyzR4DTBA6nGzRiJQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.ManageApp\\Band.ManageApp.csproj",
+  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.ManageApp\\Band.ManageApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maima\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\maima\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

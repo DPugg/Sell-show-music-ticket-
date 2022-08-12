@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZpkonqncmTkRu48lxuQ/0bF45M55xHodIKdamK3jbATQOQep5mdST4KM3opkzN4g3L+UhqPsU6YXOxnjJQIJFg==",
+  "dgSpecHash": "D2bWR1iIDnSLr1DHZlvythbNvp26lJ0P6X/M5abiOnbYiGEnYxgSVSN6SyK7NJvw1whHMZN7l93lLm5MGh3lWw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Bank.Api\\Bank.Api.csproj",
+  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Bank.Api\\Bank.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maima\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\maima\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

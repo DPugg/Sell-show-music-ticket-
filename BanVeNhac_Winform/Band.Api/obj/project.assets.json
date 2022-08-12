@@ -5688,11 +5688,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.Api\\Band.Api.csproj",
+      "projectUniqueName": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.Api\\Band.Api.csproj",
       "projectName": "Band.Api",
-      "projectPath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.Api\\Band.Api.csproj",
+      "projectPath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.Api\\Band.Api.csproj",
       "packagesPath": "C:\\Users\\maima\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.Api\\obj\\",
+      "outputPath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\maima\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5709,11 +5709,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.Data\\Band.Data.csproj": {
-              "projectPath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.Data\\Band.Data.csproj"
+            "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.Data\\Band.Data.csproj": {
+              "projectPath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.Data\\Band.Data.csproj"
             },
-            "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.ViewModels\\Band.ViewModels.csproj": {
-              "projectPath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.ViewModels\\Band.ViewModels.csproj"
+            "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.ViewModels\\Band.ViewModels.csproj": {
+              "projectPath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.ViewModels\\Band.ViewModels.csproj"
             }
           }
         }

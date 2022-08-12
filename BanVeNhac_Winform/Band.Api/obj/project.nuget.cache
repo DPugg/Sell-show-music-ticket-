@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BxjaCsV7OjYcqIckQ8bFXaRxEDyoSgay/xDt5+xh3VTpd2/iW4DYcM938IhFnBPBKMNKLpfclRUmDF8svRCZ+g==",
+  "dgSpecHash": "MQXzp42M1bR1FlK3GPFANQWsaEG3J+dFsaU8qK89HejhF8aR9DzNAR2ePXfA94lqicD0l9gb9nQMRtxcPMjwAA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\PhatTrienPhanMemHuongDichVu-release\\Band.Api\\Band.Api.csproj",
+  "projectFilePath": "C:\\Users\\maima\\OneDrive\\Documents\\ThucTap\\Sell-show-music-ticket-\\BanVeNhac_Winform\\Band.Api\\Band.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maima\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.14\\microsoft.aspnetcore.jsonpatch.3.1.14.nupkg.sha512",
     "C:\\Users\\maima\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.14\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.14.nupkg.sha512",
