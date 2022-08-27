@@ -2,6 +2,7 @@
 using Band.ViewModels.Catalog.LoaiVe;
 using Band.ViewModels.Catalog.Show;
 using Band.ViewModels.Utilities;
+using Band.ViewModels.Catalog.Show.Public;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +14,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using static Band.ViewModels.Utilities.SystemConstants;
+using Band.Data.EF;
 
 namespace Band.ManageApp
 {
     public partial class ShowsUserControl : UserControl
     {
+        private readonly BandDbContext _context;
         public static ShowsUserControl _instance;
         private ShowApiClient _showsApiClient;
         private ShowViewModel show;
@@ -29,6 +32,9 @@ namespace Band.ManageApp
         private bool isEdited;
         private ImageHandler imageHandler;
         public event EventHandler ImageChanged;
+        public ShowStatiscalViewModel SoVeDaBan;
+
+       
         public Image image
         {
             get
@@ -42,6 +48,15 @@ namespace Band.ManageApp
                 _image = value;
                 OnImageChanged();
             }
+        }
+        public bool IsNumber(string pValue)
+        {
+            foreach (Char c in pValue)
+            {
+                if (!Char.IsDigit(c))
+                    return false;
+            }
+            return true;
         }
         protected virtual void OnImageChanged()
         {
@@ -66,6 +81,8 @@ namespace Band.ManageApp
             imageHandler = new ImageHandler();
             _showsApiClient = new ShowApiClient();
             _dsLoaiVe = new List<LoaiVeViewModel>();
+            
+            
             /*_actionType = ActionType.READ;*/
             ImageChanged += delegate (object sender, EventArgs arg)
             {
@@ -76,7 +93,7 @@ namespace Band.ManageApp
             showPictureBox.Controls.Add(editCoverImgBtn);
             editCoverImgBtn.Location = new Point(showPictureBox.Width - editCoverImgBtn.Width - 10, showPictureBox.Height - editCoverImgBtn.Height - 10);
             editCoverImgBtn.BackColor = Color.FromArgb(125, Color.White);
-            performDatebox.MinDate = DateTime.Now;
+            performDatebox.MinDate = DateTime.Now.AddYears(-5);
 
             var tmp = (ShowGetAllViewModel)showsComboBox.SelectedValue;
             if (tmp == null)
@@ -106,7 +123,15 @@ namespace Band.ManageApp
         private void addShowBtn_Click(object sender, EventArgs e)
         {
             addShow();
-            
+            nameTxtBox.Enabled = true;
+            locationTxtBox.Enabled = true;
+            saleDateBox.Enabled = true;
+            saleTimeBox.Enabled = true;
+            ticketsTbl.Enabled = true;
+            performDatebox.Enabled = true;
+            performTimeBox.Enabled = true;
+            saveTiketInfoBtn.Enabled = true;
+
         }
 
         private void addShow()
@@ -124,7 +149,7 @@ namespace Band.ManageApp
                 _imageList = new List<Image>();
                 var resourcePath = Path.Combine(Application.StartupPath, @"..\Resources\");
                 //    showPictureBox.Image = new Bitmap(Path.GetFullPath(resourcePath + "image.png"));
-                showPictureBox.Image = new Bitmap(@"C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ManageApp\Resources\image.png");
+                showPictureBox.Image = new Bitmap(@"C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\BanVeNhac_Winform\Band.ManageApp\Resources\image.png");
                 showPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 nameTxtBox.Text = "";
                 nameTxtBox.ReadOnly=false;
@@ -137,6 +162,7 @@ namespace Band.ManageApp
                 detailTicketTxtBox.Text = "";
                 saveBtn.Visible = true;
                 exitBtn.Show();
+                saveBtn.Show();
                 _actionType = ActionType.CREATE;
                 deleteShowBtn.Hide();
                 editShowInfoBtn.Hide();
@@ -259,7 +285,14 @@ namespace Band.ManageApp
         }
 
         private void bindingTicketInfo(ShowViewModel show)
-        {
+        {    
+            for(int i = 0; i <3; i++)
+            {
+                for(int j =0; j<3; j++)
+                {
+                    ticketsTbl.Rows[i].Cells[j].Value = null;
+                }
+            }
             for (int i = 0; i < show.DsChiTietLoaiVe.Count; i++)
             {
                 ticketsTbl.Rows[i].Cells[0].Value = show.DsChiTietLoaiVe[i].IdLoaiVe;
@@ -354,6 +387,28 @@ namespace Band.ManageApp
             performTimeBox.Value = show.ThoiDiemBieuDien;
             saleDateBox.Value = show.ThoiDiemMoBan;
             saleTimeBox.Value = show.ThoiDiemMoBan;
+            if (show.ThoiDiemBieuDien < DateTime.Now)
+            {
+                nameTxtBox.Enabled = false;
+                locationTxtBox.Enabled = false;
+                saleDateBox.Enabled = false;
+                saleTimeBox.Enabled = false;
+                ticketsTbl.Enabled = false;
+                performDatebox.Enabled = false;
+                performTimeBox.Enabled = false;
+                saveTiketInfoBtn.Enabled = false;
+            }
+            else
+            {
+                nameTxtBox.Enabled = true;
+                locationTxtBox.Enabled = true;
+                saleDateBox.Enabled = true;
+                saleTimeBox.Enabled = true;
+                ticketsTbl.Enabled = true;
+                performDatebox.Enabled = true;
+                performTimeBox.Enabled = true;
+                saveTiketInfoBtn.Enabled = true;
+            }
         }
 
         private void editTicketInfoBtn_Click(object sender, EventArgs e)
@@ -481,7 +536,8 @@ namespace Band.ManageApp
                     tb.KeyPress += new KeyPressEventHandler(priceTicketCol_KeyPress);
                 }
             }
-            else if (ticketsTbl.CurrentCell.ColumnIndex == 2) //Desired Column
+ 
+           else if (ticketsTbl.CurrentCell.ColumnIndex == 2) //Desired Column
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -490,6 +546,8 @@ namespace Band.ManageApp
                 }
             }
         }
+
+        //check nhập vào là số hay chữ, chỉ cho số được nhập
         private void ticketPriceCol_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -504,6 +562,7 @@ namespace Band.ManageApp
                 e.Handled = true;
             }
         }
+   
         private void quantityTicketCol_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -524,6 +583,7 @@ namespace Band.ManageApp
                     }
                 }
             }*/
+           
 
             //Kiểm tra hình ảnh
             if (_imageList.Count<=0)
@@ -555,7 +615,8 @@ namespace Band.ManageApp
                 MessageBox.Show("Thời gian mở bán vé phải nhỏ hơn ngày biểu diễn!");
                 return;
             }
-
+            
+            
 
             //Kiểm tra danh sách loại vé
             var dsChiTietVe = new List<ChiTietVeViewModel>();
@@ -569,8 +630,18 @@ namespace Band.ManageApp
             {
                 MessageBox.Show("Danh sách các loại vé không được trùng nhau!");
                 return;
+            }else if(errorNum == -5)
+            {
+                MessageBox.Show("giá chỉ được nhập số ");
+                return;
             }
-
+            //===============================
+            else if (dsChiTietVe.Count == 0)
+            {
+                MessageBox.Show("chưa tạo vé ");
+                return;
+            }
+            
             // Tạo request
             var showCreateRequest = new ShowCreateRequest()
             {
@@ -585,7 +656,7 @@ namespace Band.ManageApp
             };
             if (_showsApiClient.Create(showCreateRequest))
             {
-                MessageBox.Show("Thành công!");
+                MessageBox.Show("Thành công!  "+dsChiTietVe);
                 Read();
                 
             }
@@ -612,6 +683,7 @@ namespace Band.ManageApp
             /*locationTxtBox.ReadOnly = true;*/
             ticketsTbl.ReadOnly = true;
             _actionType = ActionType.READ;
+            
         }
 
         private int getDsLoaiVeFromDGV(ref List<ChiTietVeViewModel> dsChiTietVe)
@@ -631,12 +703,21 @@ namespace Band.ManageApp
                 if (countNull == 3) continue;
                 else if (countNull == 0)
                 {
-                    result.Add(new ChiTietVeViewModel()
+                    if (IsNumber(row.Cells[1].Value.ToString()))
                     {
-                        IdLoaiVe = (int)row.Cells[0].Value,
-                        Gia = Convert.ToDecimal(row.Cells[1].Value.ToString()),
-                        SoLuongBanRa = Convert.ToInt32(row.Cells[2].Value.ToString())
-                    });
+                        result.Add(new ChiTietVeViewModel()
+                        {
+                            IdLoaiVe = (int)row.Cells[0].Value,
+                            Gia = Convert.ToDecimal(row.Cells[1].Value.ToString()),
+                            SoLuongBanRa = Convert.ToInt32(row.Cells[2].Value.ToString())
+                        });
+                    }
+                    else
+                    {
+                        
+                        return -5;
+                    }
+                    
                 }
                 else
                 {
@@ -695,10 +776,11 @@ namespace Band.ManageApp
                     
                 if (_showsApiClient.UpdateTicketInfor(request))
                 {
-                    MessageBox.Show("Thành công!");
+                    MessageBox.Show("Thành công!  IdShow" + request.IdShow + " ds ve: "+request.dsChiTietVe);
+
                     saveBtn.Visible = false;
                 }
-                else MessageBox.Show("Thất bại!");
+                else MessageBox.Show("Thất bại! IdShow" + request.IdShow + " ds ve: " + request.dsChiTietVe);
             }
         }
 
@@ -743,6 +825,12 @@ namespace Band.ManageApp
 
         private void deleteShowBtn_Click(object sender, EventArgs e)
         {
+            if(show.ThoiDiemMoBan < DateTime.Now)
+            {
+                MessageBox.Show("show đã và đang bán vé không hủy được");
+                return;
+            }
+
             var tmp = (ShowGetAllViewModel)showsComboBox.SelectedValue;
             if (!_showsApiClient.Delete(tmp.IdShow))
                 MessageBox.Show("Thất bại!");
@@ -795,8 +883,13 @@ namespace Band.ManageApp
 
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
-            saveBtn.Show();
-            exitBtn.Show();
+          //  saveBtn.Show();
+          //  exitBtn.Show();
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         /*private ChiTietVeViewModel checkForCorrectnessChiTietVe(object id, object price, object quantity)

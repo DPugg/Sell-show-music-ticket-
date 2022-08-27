@@ -11,6 +11,7 @@ namespace Band.Api.Catalog.ShowServices
         Task<List<PublicShowGetAllVm>> GetAll();
         Task<PublicGetByIdShowVm> GetById(int idShow);
         Task<int> Booking(BookingRequest request);
+        Task<int> ReceiveCode(ReceiveCodeRequest request);
         Task<HoaDonVm> GetHoaDonById(int idHoaDon);
     }
 }

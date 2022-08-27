@@ -8,7 +8,10 @@ namespace Band.ViewModels.Catalog.Show
     {
         public int IdShow { get; set; }
         public string TenShow { get; set; }
+        public string DiaDiem { get; set; }
         public DateTime NgayBieuDien { get; set; }
+
+
         public string DisplayCombobox
         {
             get

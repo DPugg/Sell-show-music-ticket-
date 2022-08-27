@@ -63,14 +63,15 @@ namespace Band.Api.Catalog.ThanhVienService
             {
                 dsVaiTroCu.Add(await _context.VaiTroDbo.FindAsync(idVaiTro));
             }
-/*            List<VaiTro> dsVaiTroMoi = new List<VaiTro>();
-            foreach (var vaiTro in request.DsTenVaiTro)
-            {
-                dsVaiTroMoi.Add(new VaiTro()
-                {
-                    TenVaiTro=vaiTro
-                });
-            }*/
+            /*            List<VaiTro> dsVaiTroMoi = new List<VaiTro>();
+                        foreach (var vaiTro in request.DsTenVaiTro)
+                        {
+                            dsVaiTroMoi.Add(new VaiTro()
+                            {
+                                TenVaiTro=vaiTro
+                            });
+                        }*/
+            string hoatdong = "Hoạt động";
 
             var thanhVien = new ThanhVien()
             {
@@ -82,6 +83,7 @@ namespace Band.Api.Catalog.ThanhVienService
                 TieuSu = request.TieuSu,
                 Instagram = request.Instagram,
                 Twitter = request.Twitter,
+                TrangThai = hoatdong,
                 DsThanhVienVsHinhAnh = new List<ThanhVienVsHinhAnh>(),
                 DsThanhVienVsVaiTro=new List<ThanhVienVsVaiTro>()
                 /*DsThanhVienVsHinhAnh = dsThanhVienVsHinhAnh*/
@@ -178,19 +180,21 @@ namespace Band.Api.Catalog.ThanhVienService
                     TenVaiTro = x.TenVaiTro
                 });
             }
+         
             ThanhVienViewModel thanhVienVm = new ThanhVienViewModel()
             {
                 DebutDate = thanhVien.DebutDate,
                 DsVaiTro = dsVaiTro,
                 Avatar = avatarFromDb,
-                Cover=coverFromDb,
+                Cover = coverFromDb,
                 Instagram = thanhVien.Instagram,
                 NgaySinh = thanhVien.NgaySinh,
                 NgheDanh = thanhVien.NgheDanh,
                 QuocTich = thanhVien.QuocTich,
                 TenKhaiSinh = thanhVien.TenKhaiSinh,
                 TieuSu = thanhVien.TieuSu,
-                Twitter = thanhVien.Twitter
+                Twitter = thanhVien.Twitter,
+                TrangThai = thanhVien.TrangThai,
             };
             return thanhVienVm;
         }
@@ -204,10 +208,11 @@ namespace Band.Api.Catalog.ThanhVienService
                                        join a in _context.HinhAnhDbo on ta.IdAnh equals a.IdAnh
                                        where t.IdThanhVien.Equals(thanhVienId)
                                        select a).ToListAsync();
-            
+
             /*            if (thanhVien == null) throw*/
-            _context.ThanhVienDbo.Remove(thanhVien);
-            _context.HinhAnhDbo.RemoveRange(dsHinhAnhFromDb);
+            //         _context.ThanhVienDbo.Remove(thanhVien);
+            //         _context.HinhAnhDbo.RemoveRange(dsHinhAnhFromDb);
+            thanhVien.TrangThai = "Ngừng hoạt động";
             return await _context.SaveChangesAsync();
         }
 
@@ -230,7 +235,8 @@ namespace Band.Api.Catalog.ThanhVienService
                     DebutDate = x.DebutDate,
                     TieuSu = x.TieuSu,
                     Instagram = x.Instagram,
-                    Twitter = x.Twitter
+                    Twitter = x.Twitter,
+                    TrangThai =x.TrangThai
                 }).ToListAsync()
                 ;
             var pageResult = new PageResult<ThanhVienViewModel>()
@@ -252,6 +258,7 @@ namespace Band.Api.Catalog.ThanhVienService
             thanhVien.TenKhaiSinh = request.TenKhaiSinh;
             thanhVien.TieuSu = request.TieuSu;
             thanhVien.Twitter = request.Twitter;
+            thanhVien.TrangThai = request.TrangThai;
             return await _context.SaveChangesAsync();
         }
 

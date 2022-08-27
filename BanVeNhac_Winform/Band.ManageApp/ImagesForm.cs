@@ -40,7 +40,6 @@ namespace Band.ManageApp
             {
                 if (_images.Count >= 0) loadImages();
             };
-           
 
             imgsContainer.VerticalScroll.Enabled = false;
             imgsContainer.VerticalScroll.Visible = false;
@@ -144,7 +143,7 @@ namespace Band.ManageApp
                     foreach (Control c in p.Controls)
                         if (c is CheckBox)
                             c.Visible=true;
-            selectAllCheckBox.Visible = true;
+            selectAllCheckBox.Visible = false;
             deleteBtn.Visible = true;
         }
         private void loadImages()
@@ -279,7 +278,7 @@ namespace Band.ManageApp
             int i = 0;
             var listId = new List<int>();
             var listimg = new List<int>();
-            
+
             foreach (var p in imgsContainer.Controls.OfType<Panel>())
             {
                 if (((CheckBox)p.Controls.OfType<CheckBox>().FirstOrDefault()).Checked)
@@ -290,6 +289,11 @@ namespace Band.ManageApp
                     listimg.Add(i); 
                 }
                 i++;
+            }
+            if(listimg.Count == 0)
+            {
+                MessageBox.Show("Chưa chọn hình để xóa");
+                return;
             }
             if (_idObject != -1 && _imgType == ImageType.IMG_BAND)
             {
@@ -314,6 +318,11 @@ namespace Band.ManageApp
             
             deleteBtn.Visible = false;
             selectAllCheckBox.Visible = false;
+        }
+
+        private void selectAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

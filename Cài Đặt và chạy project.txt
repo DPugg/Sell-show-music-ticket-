@@ -1,0 +1,2 @@
+-chạy BanVeNhac_Winform bằng visual studio trước, sau khi run có thông báo lỗi hiện ra, ấn ok để bỏ qua lỗi đó
+-chạy BanVeNhac_Website bằng visual studio code sau, chạy file index.html

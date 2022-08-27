@@ -90,13 +90,13 @@ namespace Band.ManageApp
             this.numTicketsSoldCol,
             this.expectedIncomeCol,
             this.actualIncomeCol});
-            this.statiscalDGV.Location = new System.Drawing.Point(22, 107);
+            this.statiscalDGV.Location = new System.Drawing.Point(19, 94);
             this.statiscalDGV.Name = "statiscalDGV";
             this.statiscalDGV.ReadOnly = true;
             this.statiscalDGV.RowHeadersVisible = false;
             this.statiscalDGV.RowTemplate.Height = 25;
             this.statiscalDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.statiscalDGV.Size = new System.Drawing.Size(840, 480);
+            this.statiscalDGV.Size = new System.Drawing.Size(840, 205);
             this.statiscalDGV.TabIndex = 2;
             this.statiscalDGV.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.statiscalDGV_CellValueChanged);
             this.statiscalDGV.SelectionChanged += new System.EventHandler(this.statiscalDGV_SelectionChanged);
@@ -290,6 +290,7 @@ namespace Band.ManageApp
             this.panel1.Size = new System.Drawing.Size(840, 180);
             this.panel1.TabIndex = 20;
             this.panel1.Visible = false;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label3
             // 

@@ -127,6 +127,8 @@ namespace Band.ManageApp
             coverImgBox.Controls.Add(editCoverImgBtn);
             editCoverImgBtn.Location = new Point(coverImgBox.Width - editCoverImgBtn.Width - 10, coverImgBox.Height - editCoverImgBtn.Height - 10);
             editCoverImgBtn.BackColor = Color.FromArgb(125, Color.White);
+            txtHoatDong.Enabled = false;
+
         }
 
         private void Read()
@@ -148,8 +150,8 @@ namespace Band.ManageApp
             /*MessageBox.Show(Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\Resources\user.png")));*/
          //   avatarImgBox.Image = new Bitmap(Path.GetFullPath(resourcePath+"user.png"));
          //   coverImgBox.Image = new Bitmap(Path.GetFullPath(resourcePath + "image.png"));
-            avatarImgBox.Image = new Bitmap(@"C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ManageApp\Resources\user.png");
-            coverImgBox.Image = new Bitmap(@"C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\PhatTrienPhanMemHuongDichVu-release\Band.ManageApp\Resources\image.png");
+            avatarImgBox.Image = new Bitmap(@"C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\BanVeNhac_Winform\Band.ManageApp\Resources\user.png");
+            coverImgBox.Image = new Bitmap(@"C:\Users\maima\OneDrive\Documents\ThucTap\Sell-show-music-ticket-\BanVeNhac_Winform\Band.ManageApp\Resources\image.png");
             coverImgBox.SizeMode = PictureBoxSizeMode.Zoom;
             nameTxtBox.Text = "";
             nationTxtBox.Text = "";
@@ -363,6 +365,7 @@ namespace Band.ManageApp
                     Instagram = instaTxtBox.Text,
                     Twitter = twitterTxtBox.Text,
                     TieuSu = storyTxtBox.Text,
+                    TrangThai = "Hoạt động",
                     DsAvatar = byteAvatarList,
                     DsCover = byteCoverList,
                     DsIdVaiTro = dsIdVaiTro,
@@ -537,6 +540,7 @@ namespace Band.ManageApp
                 instaTxtBox.Text = thanhVien.Instagram;
                 twitterTxtBox.Text = thanhVien.Twitter;
                 storyTxtBox.Text = thanhVien.TieuSu;
+                txtHoatDong.Text = thanhVien.TrangThai;
             }
             _actionType = ActionType.READ;
         }
@@ -705,13 +709,30 @@ namespace Band.ManageApp
                 MessageBox.Show("Chưa lưu thay đổi!");
                 return;
             }
+
             var thanhVienGetAllVm = new ThanhVienGetAllViewModel();
             thanhVienGetAllVm = thanhVienCombobox.SelectedValue as ThanhVienGetAllViewModel;
-            if (MessageBox.Show($"Xoá tất cả thông tin có liên quan của {thanhVienGetAllVm.NgheDanh}",
+
+            ThanhVienGetAllViewModel tmp = thanhVienCombobox.SelectedValue as ThanhVienGetAllViewModel;
+            var request = new ThanhVienUpdateRequestWithoutVaiTro()
+            {
+                IdThanhVien = tmp.IdThanhVien,
+                DebutDate = debuteDateBox.Value,
+                Instagram = instaTxtBox.Text,
+                NgaySinh = dobBox.Value,
+                NgheDanh = stageNameTxtBox.Text,
+                QuocTich = nationTxtBox.Text,
+                TenKhaiSinh = nameTxtBox.Text,
+                TieuSu = storyTxtBox.Text,
+                Twitter = twitterTxtBox.Text,
+                TrangThai = "Ngưng hoạt động"
+            };
+            if (MessageBox.Show($"Xoá khỏi nhóm thành viên {thanhVienGetAllVm.NgheDanh}",
                        "Xoá thành viên",
                         MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                _thanhVienApiClient.Delete(thanhVienGetAllVm.IdThanhVien);
+                //              _thanhVienApiClient.Delete(thanhVienGetAllVm.IdThanhVien);
+                _thanhVienApiClient.UpdateThanhVien(request);
                 loadDsThanhVien();
             }
         }
@@ -777,6 +798,14 @@ namespace Band.ManageApp
             return false;
         }
 
+        private void label12_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void txtHoatDong_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

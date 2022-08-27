@@ -77,8 +77,11 @@ namespace Band.Api.Controllers
         public async Task<IActionResult> UpdateTicketInfor(TicketInfoUpdateRequest request)
         {
             var result = await _manageShowService.UpdateTicketInfor(request);
-            if (result<=0)
-                return BadRequest();
+            if (result <= 0)
+            {   
+                return BadRequest("khong tim thay ve");
+            }
+                
             return Ok(true);
         }
         [HttpDelete]
@@ -134,7 +137,16 @@ namespace Band.Api.Controllers
         [HttpPost("booking")]
         public async Task<IActionResult> Booking(BookingRequest request)
         {
+           
             var result = await _publicShowService.Booking(request);
+            Console.Write("request   ==========" + request);
+            return Ok(result);
+        }
+        [HttpPost("ReceiveCode")]
+        public async Task<IActionResult> ReceiveCode(ReceiveCodeRequest request)
+        {
+            var result = await _publicShowService.ReceiveCode(request);
+            Console.WriteLine("request=====" + request);
             return Ok(result);
         }
 

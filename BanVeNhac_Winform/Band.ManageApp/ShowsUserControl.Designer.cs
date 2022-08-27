@@ -165,6 +165,7 @@ namespace Band.ManageApp
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(865, 128);
             this.panel3.TabIndex = 6;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // editShowInfoBtn
             // 
@@ -467,7 +468,7 @@ namespace Band.ManageApp
             this.ticketsTbl.ReadOnly = true;
             this.ticketsTbl.RowHeadersVisible = false;
             this.ticketsTbl.RowTemplate.Height = 25;
-            this.ticketsTbl.Size = new System.Drawing.Size(447, 98);
+            this.ticketsTbl.Size = new System.Drawing.Size(430, 98);
             this.ticketsTbl.TabIndex = 0;
             this.ticketsTbl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ticketsTbl_CellContentClick);
             this.ticketsTbl.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ticketsTbl_CellEndEdit);

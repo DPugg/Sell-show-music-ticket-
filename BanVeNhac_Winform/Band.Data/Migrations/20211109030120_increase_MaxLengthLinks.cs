@@ -57,6 +57,8 @@ namespace Band.Data.Migrations
                 oldClrType: typeof(string),
                 oldType: "varchar",
                 oldNullable: true);
+
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

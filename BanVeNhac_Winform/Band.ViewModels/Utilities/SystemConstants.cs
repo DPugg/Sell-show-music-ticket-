@@ -28,14 +28,16 @@ namespace Band.ViewModels.Utilities
         {
             SOLD_OUT=-5,
             BOOKED=-4,
-            OFF_HOURS=-6
+            OFF_HOURS=-6,
+            UNCORRECT_VERIFICATION = -7
         }
 
         public enum BankErrorCode
         {
             LOGIN_FAILED = -3,
             INCORRECT_DES_ACC=-2,
-            BALANCE_NOT_ENOUGH=-1
+            BALANCE_NOT_ENOUGH=-1,
+            UNCORRECT_STK = -8
 
         }
     }

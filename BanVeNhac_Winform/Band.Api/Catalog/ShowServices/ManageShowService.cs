@@ -133,15 +133,27 @@ namespace Band.Api.Catalog.ShowServices
 
         public List<ShowGetAllViewModel> GetAll()
         {
-            var dsShow = _context.ShowDbo.Where(p => p.ThoiDiemBieuDien > DateTime.Now).Select(p => new { p.IdShow, p.TenShow, p.ThoiDiemBieuDien }).ToList();
-/*            _context.ShowDbo.Where(p => p.ThoiDiemBieuDien > DateTime.Now).Select(p => new { p.IdShow, p.TenShow, p.ThoiDiemBieuDien}).ToList();
-*/            List<ShowGetAllViewModel> dsShowVm = new List<ShowGetAllViewModel>();
+            //    var dsShow = _context.ShowDbo.Where(p => p.ThoiDiemBieuDien > DateTime.Now).Select(p => new { p.IdShow, p.TenShow, p.ThoiDiemBieuDien }).ToList();
+            /*            _context.ShowDbo.Where(p => p.ThoiDiemBieuDien > DateTime.Now).Select(p => new { p.IdShow, p.TenShow, p.ThoiDiemBieuDien}).ToList();
+            */
+            var dsShow = _context.ShowDbo.Select(p => new { p.IdShow, p.TenShow, p.ThoiDiemBieuDien }).ToList();
+
+            List<ShowGetAllViewModel> dsShowVm = new List<ShowGetAllViewModel>();
+            var a ="";
             foreach (var x in dsShow)
             {
+                if(x.ThoiDiemBieuDien < DateTime.Now)
+                {
+                     a = x.TenShow.Insert(x.TenShow.Length, " (Đã biểu diễn)");
+                }
+                else
+                {
+                    a = x.TenShow;
+                }
                 dsShowVm.Add(new ShowGetAllViewModel()
                 {
                     IdShow=x.IdShow,
-                    TenShow=x.TenShow,
+                    TenShow=a,
                     NgayBieuDien=x.ThoiDiemBieuDien.Date
                 });
             }

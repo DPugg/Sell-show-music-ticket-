@@ -22,6 +22,8 @@ namespace Band.Data.Configurations
             builder.Property(x => x.TieuSu).HasColumnType("ntext");
             builder.Property(x => x.Instagram).HasMaxLength(500);
             builder.Property(x => x.Twitter).HasMaxLength(500);
+            builder.Property(x => x.TrangThai).HasMaxLength(50);
+
         }
     }
 }

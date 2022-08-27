@@ -18,6 +18,7 @@ namespace Band.ManageApp
         private ShowApiClient _showsApiClient;
         private PagingRequestBase _pagingRequest;
         private PageResult<ShowStatiscalViewModel> _data;
+
         public static StatisticalUserControl Instance
         {
             get
@@ -124,6 +125,10 @@ namespace Band.ManageApp
                     locationTxtBox.Text = _data.List[(int)row.Cells[0].Value - 1].DiaDiem;
                 }
 */
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
         }
     }
 }

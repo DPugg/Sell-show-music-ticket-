@@ -13,5 +13,6 @@ namespace Band.ViewModels.Catalog.ThanhVien
         public string TieuSu { get; set; }
         public string Instagram { get; set; }
         public string Twitter { get; set; }
+        public string TrangThai { get; set; }
     }
 }

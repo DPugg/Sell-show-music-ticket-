@@ -22,6 +22,7 @@ namespace Band.Data.Entities
         public string Instagram { get; set; }
 
         public string Twitter { get; set; }
+        public string TrangThai { get; set; }
         public List<ThanhVienVsVaiTro> DsThanhVienVsVaiTro { set; get; }
         public List<ThanhVienVsHinhAnh> DsThanhVienVsHinhAnh { set; get; }
     }

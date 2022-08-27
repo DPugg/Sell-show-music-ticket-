@@ -30,7 +30,7 @@ namespace Bank.Api.BankServices
         public async Task<int> CreateTransaction(PayingRequest request)
         {
             var srcAcc = await _context.BankDbo.FindAsync(request.SrcAccount);
-            if (srcAcc == null || !Decrypt(srcAcc.MatKhau).Equals(request.Password)) return (int)BankErrorCode.LOGIN_FAILED;
+            if (srcAcc == null) return (int)BankErrorCode.LOGIN_FAILED;
 
 
             var desAcc = await _context.BankDbo.FindAsync(request.DesAccount);

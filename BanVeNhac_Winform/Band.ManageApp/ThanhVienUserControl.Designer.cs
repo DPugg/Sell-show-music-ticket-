@@ -58,15 +58,17 @@ namespace Band.ManageApp
             this.label4 = new System.Windows.Forms.Label();
             this.stageNameTxtBox = new System.Windows.Forms.TextBox();
             this.rightInfoPnl = new System.Windows.Forms.Panel();
+            this.exitBtn = new System.Windows.Forms.Button();
             this.storyTxtBox = new System.Windows.Forms.RichTextBox();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.addMemberBtn = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.deleteBtn = new System.Windows.Forms.PictureBox();
             this.thanhVienCombobox = new System.Windows.Forms.ComboBox();
             this.infoPnl = new System.Windows.Forms.Panel();
-            this.saveBtn = new System.Windows.Forms.Button();
-            this.exitBtn = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtHoatDong = new System.Windows.Forms.TextBox();
             this.imgPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.editCoverImgBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editAvatarBtn)).BeginInit();
@@ -148,6 +150,8 @@ namespace Band.ManageApp
             // 
             // leftInfoPnl
             // 
+            this.leftInfoPnl.Controls.Add(this.txtHoatDong);
+            this.leftInfoPnl.Controls.Add(this.label12);
             this.leftInfoPnl.Controls.Add(this.label11);
             this.leftInfoPnl.Controls.Add(this.label3);
             this.leftInfoPnl.Controls.Add(this.nationTxtBox);
@@ -374,6 +378,17 @@ namespace Band.ManageApp
             this.rightInfoPnl.Size = new System.Drawing.Size(316, 297);
             this.rightInfoPnl.TabIndex = 2;
             // 
+            // exitBtn
+            // 
+            this.exitBtn.Location = new System.Drawing.Point(159, 224);
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(147, 40);
+            this.exitBtn.TabIndex = 6;
+            this.exitBtn.Text = "Thoát";
+            this.exitBtn.UseVisualStyleBackColor = true;
+            this.exitBtn.Visible = false;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
+            // 
             // storyTxtBox
             // 
             this.storyTxtBox.Location = new System.Drawing.Point(12, 41);
@@ -382,6 +397,17 @@ namespace Band.ManageApp
             this.storyTxtBox.TabIndex = 1;
             this.storyTxtBox.Text = "";
             this.storyTxtBox.TextChanged += new System.EventHandler(this.storyTxtBox_TextChanged);
+            // 
+            // saveBtn
+            // 
+            this.saveBtn.Location = new System.Drawing.Point(3, 224);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(147, 40);
+            this.saveBtn.TabIndex = 5;
+            this.saveBtn.Text = "Lưu";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Visible = false;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // label8
             // 
@@ -444,27 +470,23 @@ namespace Band.ManageApp
             this.infoPnl.Size = new System.Drawing.Size(890, 308);
             this.infoPnl.TabIndex = 4;
             // 
-            // saveBtn
+            // label12
             // 
-            this.saveBtn.Location = new System.Drawing.Point(3, 224);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(147, 40);
-            this.saveBtn.TabIndex = 5;
-            this.saveBtn.Text = "Lưu";
-            this.saveBtn.UseVisualStyleBackColor = true;
-            this.saveBtn.Visible = false;
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 135);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 15);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Hoạt động";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
-            // exitBtn
+            // txtHoatDong
             // 
-            this.exitBtn.Location = new System.Drawing.Point(159, 224);
-            this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(147, 40);
-            this.exitBtn.TabIndex = 6;
-            this.exitBtn.Text = "Thoát";
-            this.exitBtn.UseVisualStyleBackColor = true;
-            this.exitBtn.Visible = false;
-            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
+            this.txtHoatDong.Location = new System.Drawing.Point(81, 136);
+            this.txtHoatDong.Name = "txtHoatDong";
+            this.txtHoatDong.Size = new System.Drawing.Size(100, 23);
+            this.txtHoatDong.TabIndex = 10;
+            this.txtHoatDong.TextChanged += new System.EventHandler(this.txtHoatDong_TextChanged);
             // 
             // ThanhVienUserControl
             // 
@@ -541,5 +563,7 @@ namespace Band.ManageApp
         private System.Windows.Forms.Button exitBtn;
         private System.Windows.Forms.ListBox dsVaiTroLbl;
         private System.Windows.Forms.PictureBox addVaiTroBtn;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtHoatDong;
     }
 }

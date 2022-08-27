@@ -10,7 +10,7 @@ namespace Band.ViewModels.Catalog.Show.Public
         public int IdLoaiVe { get; set; }
         public int SoLuong { get; set; }
         public string SDT { get; set; }
+        public string email { get; set; }
         public string Account { get; set; }
-        public string Password { get; set; }
     }
 }

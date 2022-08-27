@@ -19,7 +19,10 @@ namespace Band.Api.Catalog.ThanhVienService
         }
         public async Task<List<GetAllThanhVienViewModel>> GetAll()
         {
-            var dsThanhVien = await _context.ThanhVienDbo.Select(p => new { p.IdThanhVien, p.NgheDanh }).ToListAsync();
+          //  var dsThanhVien = await _context.ThanhVienDbo.Select(p => new { p.IdThanhVien, p.NgheDanh }).ToListAsync();
+            var dsThanhVien = await(from t in _context.ThanhVienDbo           
+                   where t.TrangThai.Equals("Hoạt động") 
+                   select new { t.IdThanhVien, t.NgheDanh }).ToListAsync(); 
             List<GetAllThanhVienViewModel> dsThanhVienVm = new List<GetAllThanhVienViewModel>();
             foreach (var x in dsThanhVien)
             {
@@ -85,7 +88,7 @@ namespace Band.Api.Catalog.ThanhVienService
                 QuocTich = thanhVien.QuocTich,
                 TenKhaiSinh = thanhVien.TenKhaiSinh,
                 TieuSu = thanhVien.TieuSu,
-                Twitter = thanhVien.Twitter
+                Twitter = thanhVien.Twitter,
             };
             return thanhVienVm;
         }

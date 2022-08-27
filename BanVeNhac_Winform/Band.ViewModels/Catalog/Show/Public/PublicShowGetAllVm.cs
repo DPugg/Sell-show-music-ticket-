@@ -8,5 +8,7 @@ namespace Band.ViewModels.Catalog.Show.Public
     {
         public DateTime ThoiDiemMoBan { get; set; }
         public byte[] HinhAnh { get; set; }
+        public List<PublicChiTietVeVm> DsLoaiVe { get; set; }
+
     }
 }

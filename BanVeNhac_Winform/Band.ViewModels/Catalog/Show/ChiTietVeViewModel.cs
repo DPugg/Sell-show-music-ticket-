@@ -9,5 +9,6 @@ namespace Band.ViewModels.Catalog.Show
         public int IdLoaiVe { get; set; }
         public decimal Gia { get; set; }
         public int SoLuongBanRa { get; set; }
+        public int SoLuongConLai { get; set; }
     }
 }

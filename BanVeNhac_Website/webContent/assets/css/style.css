@@ -443,7 +443,7 @@ html{
   
 .model{
     position: fixed;
-    top: 0;
+    top: 52px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -458,7 +458,7 @@ html{
 .model-contaner{
     width: 1200px;
     background-color: #fff;
-    min-height: 200px;
+    min-height: 150px;
 }
 
 .model-close {
@@ -538,6 +538,8 @@ input.model-input {
 .tbnPay{
 	display: flex;
 }
+
+
 
 button.model-pay-btn {
     width: 30%;
@@ -653,9 +655,7 @@ button.model-pay-btn:hover{
 .model_member-footer{
     height: 16px;
 }
-.openModel{
-    display: flex;
-}
+
 
 .modal_bill{
     position: fixed;
@@ -667,6 +667,9 @@ button.model-pay-btn:hover{
     align-items: center;
     justify-content: center;
     display: none;
+}
+.openModel{
+    display: flex;
 }
 
 .modal_bill-container{
@@ -683,15 +686,18 @@ button.model-pay-btn:hover{
     line-height: 40px;
     font-weight: bold;
     text-align: center;
-    color: #5e5353;
+    background: #717171;
+    color: #fff;
  }   
 .modal_bill-body{
     padding-top: 12px;
     padding-bottom: 30px;
     padding-left: 20px;
+    background: linear-gradient(45deg, black, transparent)
  }   
  .modal_bill-item{
      padding: 8px 8px;
+     color: bisque;
  }
 .modal_bill-place{
 
@@ -722,7 +728,9 @@ button.model-pay-btn:hover{
  }   
 .modal_bill-footer{
     padding-left: 20px;
+    background: #a29595;
+    display: flex;
  }   
 .modal_bill-contact{
-	
+	margin-right: 480px;
  }   

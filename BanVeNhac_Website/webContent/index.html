@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<!-- <%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +7,15 @@
 <meta name="viewport"
 	content="width = device-width, initial-scales = 1.0">
 <title>Black Pink</title>
-<link rel="stylesheet" href="./assets/callAPI/api.js">
+
 <link rel="stylesheet" href="./assets/css/style.css">
 <link rel="stylesheet"
 	href="./assets/fonts/themify-icons/themify-icons.css">
 
 <link rel="stylesheet" href="./assets/callAPI/api.js">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 
 </head>
 
@@ -215,7 +218,7 @@
 								class="form-control">
 						</div>
 
-						<input class="form-submit-btn" type="submit" value="SEND">
+						<input class="form-submit-btn" type="submit" id="testPDF" value="SEND">
 					</form>
 				</div>
 
@@ -246,7 +249,6 @@
 
 	<ul id="list-courses">
 
-
 		<script src="./assets/callAPI/api.js"></script>
 
 
@@ -261,7 +263,7 @@
 
 
 
-	<div class="model">
+	<div class="model ">
 		<div class="model-contaner">
 			<div class="js-model-close model-close">
 				<i class="ti-close"></i>
@@ -308,17 +310,9 @@
 							</label>
 
 						</div>
-						<div class="model-info">
-							<label for=""> <i class="ti-mobile"></i> SDT
-							</label> <input id="SDT" type="text" placeholder="SDT?"
-								class="model-input">
-						</div>
-
-
-
-
 					</div>
 
+					
 
 					<div class="info-member_right">
 						<div class="model-info">
@@ -327,17 +321,30 @@
 						</div>
 					</div>
 				</div>
+				<div class="card-info">
+					<div class="model-info flex-left">
+						<label for=""> <i class="ti-mobile"></i> SDT
+						</label> <input id="SDT" type="number" placeholder="SDT?"
+							class="model-input">
+					</div>
+					<div class="model-info flex-right">
+						<label for=""> <i class="ti-mobile"></i> Email
+						</label> <input id="email" type="email" placeholder="Email?"
+							class="model-input">
+					</div>
+
+				</div>
 
 				<div class="card-info">
 					<div class="model-info flex-left">
 						<label for=""> <i class="ti-credit-card"></i> Số tài khoản
-						</label> <input id="STK" type="text" placeholder="Số tài khoản?"
+						</label> <input id="STK" type="number" placeholder="Số tài khoản?"
 							class="model-input">
 					</div>
 					<div class="model-info flex-right">
-						<label for=""> <i class="ti-lock"></i> Số Pin
-						</label> <input id="PIN" type="password" placeholder="Số Pin?"
-							class="model-input">
+						<label for=""> <i class="ti-lock"></i> OTP
+						</label> <input id="PIN" type="password" placeholder="OTP ?"
+							class="model-input" >
 					</div>
 				</div>
 
@@ -347,9 +354,11 @@
 				</div>
 
 				<div class="tbnPay">
-					<button class="model-pay-btn" id="pay">
-						Pay <i class="ti-check"></i>
+					<button class="model-pay-btn flex-left" id="getCode">
+						getCode <i class="ti-lock"></i>
 					</button>
+					<button class="model-pay-btn flex-right" id ="pay">
+						Pay <i class ="ti-check" ></i></button>
 				</div>
 
 			</div>
@@ -405,9 +414,9 @@
 
 	<div id="name">1.</div>
 
-	<div class="modal_bill">
+	<div class="modal_bill " >
 
-		<div class="modal_bill-container">
+		<div class="modal_bill-container" id="Bill">
 			<div
 				class="js-model-close model-close js-close-memberInfo js-close-Bill">
 				<i class="ti-close"></i>
@@ -417,7 +426,7 @@
 
 			</div>
 			<div
-				style="height: 1px; background-color: #ccc; flex: auto; margin: 15px;"></div>
+				style="height: 1px; background-color: #000; flex: auto; margin: 15px;"></div>
 			<div class="modal_bill-body">
 				<div class="modal_bill-place modal_bill-item" id="modal_bill-place">Địa
 					Điểm:</div>
@@ -441,11 +450,15 @@
 					gian biểu diễn:</div>
 			</div>
 			<div
-				style="height: 1px; background-color: #ccc; flex: auto; margin: 15px;"></div>
+				style="height: 1px; background-color: #000; flex: auto; margin-top: 15px;"></div>
 			<div class="modal_bill-footer">
-				<div class="modal_bill-contact">Thông tin liên hệ: 0500654886</div>
+				<div class="modal_bill-contact">Thông tin liên hệ: 0500654886</div>			
+				<input id="btn-Preview-Image" type="button"  value="Get Link" onclick="download()"/>
+			<a id="btn-Convert-Html2Image" style="display: none;" href="#">Download</a>
 			</div>
+			
 		</div>
+		
 	</div>
 
 
@@ -453,6 +466,39 @@
 
 
 	<script>
+	function download()
+        {
+            document.getElementById("btn-Convert-Html2Image").style.display = 'block';
+        }
+
+	$(document).ready(function(){
+
+		
+	var element = $("#Bill"); // global variable
+	var getCanvas; // global variable
+	
+		$("#btn-Preview-Image").on('click', function () {
+			html2canvas(element, {
+			onrendered: function (canvas) {
+					$("#previewImage").append(canvas);
+					getCanvas = canvas;
+				}
+			});
+			
+		});		
+
+		$("#btn-Convert-Html2Image").on('click', function () {
+		var imgageData = getCanvas.toDataURL("image/png");
+		// Now browser starts downloading it instead of just showing it
+		var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+		$("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
+		});
+
+	});
+
+	
+
+
 		 
          
          
@@ -460,117 +506,128 @@
 // <!-- =============================================show thong tin ve=============================================== -->
 
 
-		 // Lấy đối tượng
-		var idLoaiVe ;
-		var SoLuong;
-        var normal = document.getElementById("normal");
-        var vip = document.getElementById("vip");
-        var vvip = document.getElementById("vvip");
-        // Thêm sự kiện cho đối tượng
-        normal.addEventListener('click', function(){
-        	 document.getElementById('giaVe').innerHTML = normal.value;
-        	 console.log(normal.value);
-        	//keo value gia ve tu api len
+		//  // Lấy đối tượng
+		// var idLoaiVe ;
+		// var SoLuong;
+		// var GiaVe;
+        // var normal = document.getElementById("normal");
+        // var vip = document.getElementById("vip");
+        // var vvip = document.getElementById("vvip");
+        // // Thêm sự kiện cho đối tượng
+        // normal.addEventListener('click', function(){
+        // 	// document.getElementById('giaVe').innerHTML = normal.value;
+        // 	// console.log(normal.value);
+        // 	//keo value gia ve tu api len
         	
-        	var postAPI ='https://localhost:44315/api/show/loai-ve'
-        		return fetch(postAPI)
-				.then(function(response){
-					return response.json();
-					//== json.parse
-				})
-				.then(function(posts){
-					var htmls = posts.map(function(post){
-		                if(post.idLoaiVe == 1){
-		                   // document.getElementsByClassName('typeTicket').innerHTML=post.tenLoai;
-		                    document.getElementById('details').innerHTML=post.chiTiet;		
-		                    idLoaiVe = post.idLoaiVe ;	                   
-		                }
-				});
-			});
-            // Gán giá trị vào div
+        // 	var postAPI ='https://localhost:44315/api/show/loai-ve'
+        // 		return fetch(postAPI)
+		// 		.then(function(response){
+		// 			return response.json();
+		// 			//== json.parse
+		// 		})
+		// 		.then(function(posts){
+		// 			var htmls = posts.map(function(post){
+		//                 if(post.idLoaiVe == 1){
+		//                    // document.getElementsByClassName('typeTicket').innerHTML=post.tenLoai;
+		//                     document.getElementById('details').innerHTML=post.chiTiet;		
+		//                     idLoaiVe = post.idLoaiVe ;	                   
+
+		// 					GiaVe = post.giaVe;
+        // 	 				console.log(post.GiaVe);
+		//                 }
+		// 		});
+		// 	});
+        //     // Gán giá trị vào div
+		// 	document.getElementById('GiaVe').innerHTML=GiaVe;
           
             
-        });
+        // });
         
         
         
-        vip.addEventListener('click', function(){
-        	//keo value gia ve tu api len
-        	var postAPI ='https://localhost:44315/api/show/loai-ve'
-			fetch(postAPI)
-				.then(function(response){
-					return response.json();
-					//== json.parse
-				})
-				.then(function(posts){
-					var htmls = posts.map(function(post){
-		                if(post.idLoaiVe == 2){
-		                   // document.getElementById('typeTicket').innerHTML=`${post.tenLoai}`;
-		                    document.getElementById('details').innerHTML=post.chiTiet;
-		                    idLoaiVe = post.idLoaiVe;
-		                }				                
-				});
-			});
+        // vip.addEventListener('click', function(){
+        // 	//keo value gia ve tu api len
+        // 	var postAPI ='https://localhost:44315/api/show/loai-ve'
+		// 	fetch(postAPI)
+		// 		.then(function(response){
+		// 			return response.json();
+		// 			//== json.parse
+		// 		})
+		// 		.then(function(posts){
+		// 			var htmls = posts.map(function(post){
+		//                 if(post.idLoaiVe == 2){
+		//                    // document.getElementById('typeTicket').innerHTML=`${post.tenLoai}`;
+		//                     document.getElementById('details').innerHTML=post.chiTiet;
+		//                     idLoaiVe = post.idLoaiVe;
+
+		// 					GiaVe = post.giaVe;
+        // 	 				console.log(post.giaVe);
+		//                 }				                
+		// 		});
+		// 	});
         	
         	
-            // Gán giá trị vào div
-            document.getElementById('giaVe').innerHTML = vip.value;
-        });	
+        //     // Gán giá trị vào div
+        //     document.getElementById('giaVe').innerHTML = GiaVe;
+        // });	
         
-        vvip.addEventListener('click', function(){
-        	//keo value gia ve tu api len
-        	var postAPI ='https://localhost:44315/api/show/loai-ve'
-			fetch(postAPI)
-				.then(function(response){
-					return response.json();
-					//== json.parse
-				})
-				.then(function(posts){
-					var htmls = posts.map(function(post){
-		                if(post.idLoaiVe == 3){
-		                  //  document.getElementById('typeTicket').innerHTML=`${post.tenLoai}`;
-		                    document.getElementById('details').innerHTML=post.chiTiet;
-		                    idLoaiVe = post.idLoaiVe;
-		                }				                
-				});
-			});
+        // vvip.addEventListener('click', function(){
+        // 	//keo value gia ve tu api len
+        // 	var postAPI ='https://localhost:44315/api/show/loai-ve'
+		// 	fetch(postAPI)
+		// 		.then(function(response){
+		// 			return response.json();
+		// 			//== json.parse
+		// 		})
+		// 		.then(function(posts){
+		// 			var htmls = posts.map(function(post){
+		//                 if(post.idLoaiVe == 3){
+		//                   //  document.getElementById('typeTicket').innerHTML=`${post.tenLoai}`;
+		//                     document.getElementById('details').innerHTML=post.chiTiet;
+		//                     idLoaiVe = post.idLoaiVe;
+
+		// 					GiaVe = post.giaVe;
+        // 	 				console.log(post.giaVe);
+		//                 }				                
+		// 		});
+		// 	});
         	
-        	// Gán giá trị vào div
-        	document.getElementById('giaVe').innerHTML = vvip.value
-        })
+        // 	// Gán giá trị vào div
+        // 	document.getElementById('giaVe').innerHTML = GiaVe;
+        // })
         
 	
          						
 // <!-- =============================================set tong luong tien ve can tra======================== -->
 // <!-- =============================================set tong luong tien ve can tra======================== -->
 			
-		 					var one = document.getElementById("one");
-				            var two = document.getElementById("two");
-				            var three = document.getElementById("three");
-				            one.addEventListener('click', function(){
+		 					// var one = document.getElementById("one");
+				            // var two = document.getElementById("two");
+				            // var three = document.getElementById("three");
+				            // one.addEventListener('click', function(){
 								
-								var giaVe = document.getElementById("giaVe").innerHTML;
-								document.getElementById("cost").innerHTML = giaVe*one.value;
-								SoLuong = one.value;
-						      })
+							// 	var giaVe = document.getElementById("giaVe").innerHTML;
+							// 	document.getElementById("cost").innerHTML = giaVe*one.value;
+							// 	SoLuong = one.value;
+						    //   })
 						      
-						      two.addEventListener('click', function(){
+						    //   two.addEventListener('click', function(){
 								
-								var giaVe = document.getElementById("giaVe").innerHTML;
-								document.getElementById("cost").innerHTML = giaVe*two.value;
-								SoLuong = two.value;
-						      })
+							// 	var giaVe = document.getElementById("giaVe").innerHTML;
+							// 	document.getElementById("cost").innerHTML = giaVe*two.value;
+							// 	SoLuong = two.value;
+						    //   })
 				            
-				            three.addEventListener('click', function(){
+				            // three.addEventListener('click', function(){
 								
-								var giaVe = document.getElementById("giaVe").innerHTML;
-								document.getElementById("cost").innerHTML = giaVe*three.value;
-								SoLuong = three.value;
-						      });
+							// 	var giaVe = document.getElementById("giaVe").innerHTML;
+							// 	document.getElementById("cost").innerHTML = giaVe*three.value;
+							// 	SoLuong = three.value;
+						    //   });
 				           
 				 
 
-				            
+				       //stk: 6623375586     
 				         
           
       </script>

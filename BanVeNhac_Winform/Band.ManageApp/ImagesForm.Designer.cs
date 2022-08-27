@@ -80,6 +80,7 @@ namespace Band.ManageApp
             this.selectAllCheckBox.Text = "Tất cả";
             this.selectAllCheckBox.UseVisualStyleBackColor = true;
             this.selectAllCheckBox.Visible = false;
+            this.selectAllCheckBox.CheckedChanged += new System.EventHandler(this.selectAllCheckBox_CheckedChanged);
             // 
             // saveBtn
             // 

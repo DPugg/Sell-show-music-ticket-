@@ -40,6 +40,49 @@ function reply_click(clicked_id) {
 }
 */
 
+var IdShow;
+var dsCTLoaiVe;
+var idLoaiVe ;
+var SoLuong;
+var giaVe;
+var payment = SoLuong*giaVe;
+var SLMax = 3;
+var validate_SoLuong;
+var validate_loaiVe;
+function reply_click(clicked_id)
+  {	
+	IdShow = document.getElementById(clicked_id).id;
+    console.log(clicked_id + "..........."+ IdShow);
+
+ //====================================hien ds ve====================================
+
+
+	console.log(clicked_id);
+	var url = new URL('https://localhost:44315/api/show/byid')
+
+    var params = {idShow: clicked_id} 
+    
+
+    url.search = new URLSearchParams(params).toString();
+
+	console.log(url);
+    fetch(url)
+    .then(response => response.json())
+      .then(member => {
+//		console.log(member.dsChiTietLoaiVe)
+		dsCTLoaiVe = member.dsChiTietLoaiVe;
+		console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
+	  })
+		
+
+       .catch((error) => {
+         console.error('Error:', error);
+       });
+			 
+				 
+  }
+
+  
 
 
  //====================================hien ds thanh vien====================================
@@ -197,45 +240,6 @@ function memberInfor(clicked_id) {
 
 
 
- //====================================hien thong tin show====================================
-//====================================hien thong tin show====================================
-//====================================hien thong tin show====================================
-//====================================hien thong tin show====================================
-//====================================hien thong tin show====================================
-//====================================hien thong tin show====================================
-//====================================hien thong tin show====================================
-//====================================hien thong tin show====================================
-/*
-				          //https://localhost:44315/api/show/public/byid?idShow=2
-				          //function showInfo(idShow){
-				          	var url = new URL('https://localhost:44315/api/show/public/byid')
-
-				              var params = { idShow: 2} 
-
-				              url.search = new URLSearchParams(params).toString();
-
-				              fetch(url)
-				              .then(response => response.json())
-				                .then(data => {
-				                  console.log('Success:', data);
-				          		
-					          		document.getElementById('show-img1').src = `data:image/png;base64, ${data.dsHinhAnh}`;
-					          		document.getElementById("show-name1").innerHTML=data.tenShow;
-					          		document.getElementById('show-time1').innerHTML=data.thoiDiemBieuDien;
-					          		document.getElementById('show-place1').innerHTML=data.diaDiem;
-				          			document.getElementById('show1').name=data.idShow;
-				          						          		
-				                })
-				                .catch((error) => {
-				                  console.error('Error:', error);
-				                });
-				          //}
-
-*/
-
-
-
-
 	var getAPI = 'https://localhost:44315/api/show/public/all';
 	function start() {
 		getMembers(renderMembers);
@@ -256,32 +260,27 @@ function memberInfor(clicked_id) {
 		var memberInfo = document.querySelector('#ticket-place-list');
 
 		var htmls = members.map(function(member) {
+
 				
 				return `
       			<div class="ticket-place-item" >
 					<img class="ticket-img" id="show-img" src="data:image/png;base64,${member.hinhAnh}"
-						alt="Ha Noi">
+						alt="img place of show">
 					<div class="content-ticket">
-						
+						<p class="name">Concept: ${member.tenShow}</p>
 						<p class="time" id="show-time">Thời điểm mở bán: ${member.thoiDiemMoBan}</p>
 						
-						<button class="buy-ticket" id="show" name="1" onClick="reply_click(this.id)">Buy Tickets</button>
+						<p class="describe">Địa Điểm: ${member.diaDiem}</p>
+						<button class="buy-ticket" id="${member.idShow}" name="1" onClick="reply_click(${member.idShow})">Buy Tickets</button>
 					</div>
 				</div>
       		`;
 			
+		
+			
 		});
 		
 
-
-		
-		
-
-	
-
-		
-		
-      
 //====================================hien thong tin bill====================================
 //====================================hien thong tin bill====================================
 
@@ -325,32 +324,51 @@ function memberInfor(clicked_id) {
  }
 */
 
-var IdShow;
 
-function reply_click(clicked_id)
-  {
-      console.log(clicked_id);
-  }
 
+// // validate so luong ve
+// var quantity = document.getElementsByName("quantity");
+// if(quantity[0] === false && quantity[1] == false && quantity[2] ===false){
+// 	validate_SoLuong ="1";
+// }
+
+// //validate loai ve
+// var typeTicket = document.getElementsByClassName("typeTicket");
+// if(typeTicket[0] === false && typeTicket[1] == false && typeTicket[2] ===false){
+// 	validate_loaiVe ="1";
+// }
+
+var input_OTP = document.getElementById('PIN');
+var btnPay = document.getElementById('pay');
+
+//========================================lấy mã xác nhận========================
 				            
-				            document.getElementById("pay").onclick= function(){
+				            document.getElementById('getCode').onclick= function(){
 				            	var stk = document.getElementById("STK").value.toString();
-				            	var pin = document.getElementById("PIN").value;
-				            	var idShow = "9";
+				            	var OTP = document.getElementById("PIN").value;
+				            	var email = document.getElementById("email").value;
 				            	var sdt = document.getElementById("SDT").value;
-				            	var payment = document.getElementById("cost").innerHTML;
-				            	
+				            	payment = document.getElementById("cost").innerHTML;
+								if( stk === "" || email === ""|| sdt ===""|| validate_SoLuong ==="1" || validate_loaiVe ==="1"){
+									alert("xin nhập đẩy đủ thông tin");
+									return;
+								}else if(payment ==="0" || payment===""){
+									alert("xin kiếm tra lại thông tin vé");
+									return;
+								}
 
-				            	
-						
+								
+
+								
+				            					            							
 				        //==============đặt vé===================================    	
 				            	  const dataShow = {
-				                        "IdShow":9,//get IDShow
+				                        "IdShow":Number(IdShow),//get IDShow
 				                        "IdLoaiVe":Number(idLoaiVe),
 				                        "SoLuong":Number(SoLuong),
 				                        "SDT":sdt,
+										"email": email,
 				                        "Account": stk,
-				                        "Password":pin
 				                    };
 				                  //https://localhost:44315/api/show/booking
 				                         fetch('https://localhost:44315/api/show/booking', {
@@ -362,24 +380,29 @@ function reply_click(clicked_id)
 				                        })
 				                          .then(response => response.json())
 				                          .then(data => {
-				                            console.log('Success:', data);
-				                            if(data>0){
-				                            	alert("Đăt vé thành công !!!");
-								
-												
-				                            	showBill();
+				                            console.log('Success:', typeof(data), data);
+				                            if(data >=0){
+												console.log("đã gửi mã xác nhận")
+				                            	alert("nhập mã xác nhận");
 				                            }
 				                            else{
-				                            	if(data == -5){
+				                            	if(data === -5){
 				                            		alert("hết vé");
+													return;
 				                            	}
-				                            	if(data == -3){
+												if(data === -4){
+				                            		alert("SDT đã đặt vé rồi");
+													return;
+				                            	}
+				                            	if(data === -8){
 				                            		alert("Sai thông tin tk, vui lòng kiểu tra lại");
+													return;
 				                            	}
-				                            	if(data== -1){
+				                            	if(data=== -1){
 				                            		alert("Số dư tài khoản không đủ");
+													return;
 				                            	}
-				                            	if(data == -6){
+				                            	if(data === -6){
 				                            		//showBill();
 				                            		//showBillInfo(7);
 				                            		alert("Ngoài thời gian đặt vé");
@@ -393,44 +416,6 @@ function reply_click(clicked_id)
 				                            console.error('Error:', error);
 				                          });
 				                  
-				                  			      
-				            			    
-				            	
-				            //lấy loại vé		            	
-				            	var LoaiVe = document.getElementsByName("choose_ticket");
-				                            for (var i = 0; i < idLoaiVe.length; i++){
-				                                if (idLoaiVe[i].checked === true){
-				                                  
-				            						if(idLoaiVe[i].id == "normal"){
-				            							return idLoaiVe = 1;						
-				            						}
-				            						if(idLoaiVe[i].id == "vip"){
-				            							return idLoaiVe = 2;
-				            						}
-				            						if(idLoaiVe[i].id == "vvip"){
-				            							return idLoaiVe = 3;
-				            						}
-				                                }
-				                            }
-				                            
-				            	
-				                //lấy Số lượng vé
-				            	var quantity = document.getElementsByName("quantity");
-	                            for (var i = 0; i < SoLuong.length; i++){
-	                                if (quantity[i].checked === true){
-	                                   
-	            						if(quantity[i].id == "one"){
-	            							return SoLuong = 1;						
-	            						}
-	            						if(quantity[i].id == "two"){
-	            							return SoLuong = 2;
-	            						}
-	            						if(quantity[i].id == "three"){
-	            							return SoLuong = 3;
-	            						}
-	                                }
-	                            }
-
 										console.log(idLoaiVe);
 				                        console.log(SoLuong);
 				                        console.log(sdt);
@@ -445,6 +430,50 @@ function reply_click(clicked_id)
 	memberInfo.innerHTML = htmls.join('');
 
 
+//==================================thanh toán và lấy hóa đơn==================
+
+document.getElementById('pay').onclick= function(){
+	var OTP = document.getElementById("PIN").value;
+	var email = document.getElementById("email").value;
+
+	if(OTP ==="" || email ===""){
+		alert("vui lòng nhập đủ thông tin");
+	}
+	
+	const XacNhan= {
+		"email": email,
+		"MaXacNhan": OTP
+	};
+
+	fetch('https://localhost:44315/api/show/ReceiveCode', {
+		method: 'POST', // or 'PUT'
+		headers: {
+		  'Content-Type': 'application/json',
+		},
+		 body: JSON.stringify(XacNhan),
+	  })
+		.then(response => response.json())
+		.then(data => {
+			if(data > 0){
+				console.log("thanh toán thành công");
+				showBill();
+				showBillInfo(data);
+				
+			}
+			else if(data == -1){
+				alert("Số dư không đủ");
+				return;
+			}
+			else if(data == -3){
+				alert("Số tài khoản không đúng, vui lòng kiểm tra lại");
+				return;
+			}
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		  });
+
+}
 
 //========================================use modal====================================
 //========================================use modal====================================
@@ -512,8 +541,156 @@ function reply_click(clicked_id)
 
 
 		modalClose.addEventListener('click',  hide_bill);
+
 		
+		var normal = document.getElementById("normal");
+		var vip = document.getElementById("vip");
+        var vvip = document.getElementById("vvip");
 		
+			normal.addEventListener('click', function(){
+				giaVe;
+				let i = 0;
+				//===========giá vé
+				console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
+				while (i < dsCTLoaiVe.length){
+					console.log(dsCTLoaiVe[i]);
+					if(dsCTLoaiVe[i].idLoaiVe == 1){
+						giaVe = dsCTLoaiVe[i].gia;
+						console.log(dsCTLoaiVe[i].gia + "............"+giaVe);
+						break;
+					}
+					else{
+						 alert("ve loai nay da het hoac khong ban 1");
+						giaVe = "0";						
+					}
+					
+					i++;
+				}
+				document.getElementById('giaVe').innerHTML = giaVe;
+
+				//============chi tiết vé
+				var postAPI ='https://localhost:44315/api/show/loai-ve'
+						return fetch(postAPI)
+						.then(function(response){
+							return response.json();
+							//== json.parse
+						})
+						.then(function(posts){
+							var htmls = posts.map(function(post){
+				                if(post.idLoaiVe == 1){
+				                    document.getElementById('details').innerHTML=post.chiTiet;		
+				                    idLoaiVe = post.idLoaiVe ;	                   
+		
+								
+				                }
+						});
+					});
+			})
+			vip.addEventListener('click', function(){
+				giaVe;
+				let i = 0;
+				console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
+				//==============loại vé
+				while (i < dsCTLoaiVe.length){
+					console.log(dsCTLoaiVe[i]);
+					
+					if(dsCTLoaiVe[i].idLoaiVe == 2){
+						giaVe = dsCTLoaiVe[i].gia;
+						console.log(dsCTLoaiVe[i].gia + "........."+giaVe);					
+						break;
+					}
+					else{
+						giaVe = "0";
+						alert("ve loai nay da het hoac khong ban 2");
+												
+					}
+					
+					i++;
+				}
+				document.getElementById('giaVe').innerHTML = giaVe;
+
+				//=============chi tiết vé
+				var postAPI ='https://localhost:44315/api/show/loai-ve'
+						return fetch(postAPI)
+						.then(function(response){
+							return response.json();
+							//== json.parse
+						})
+						.then(function(posts){
+							var htmls = posts.map(function(post){
+				                if(post.idLoaiVe == 2){
+				                    document.getElementById('details').innerHTML=post.chiTiet;		
+				                    idLoaiVe = post.idLoaiVe ;	                   
+		
+								
+				                }
+						});
+					});
+			})
+			vvip.addEventListener('click', function(){
+				giaVe;
+				let i = 0;
+				console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
+				//==============giá vé
+				while (i < dsCTLoaiVe.length){
+					console.log(dsCTLoaiVe[i]);
+					if(dsCTLoaiVe[i].idLoaiVe == 3){
+						giaVe = dsCTLoaiVe[i].gia;
+						console.log(dsCTLoaiVe[i].gia + "........."+giaVe);											
+						break;
+					}
+					else{
+						alert("ve loai nay da het hoac khong ban 3");
+						giaVe = "0";						
+
+					}
+					
+					
+					i++;
+				}
+				document.getElementById('giaVe').innerHTML = giaVe;
+
+				//===============chi tiết vé
+				var postAPI ='https://localhost:44315/api/show/loai-ve'
+						return fetch(postAPI)
+						.then(function(response){
+							return response.json();
+							//== json.parse
+						})
+						.then(function(posts){
+							var htmls = posts.map(function(post){
+				                if(post.idLoaiVe == 3){
+				                    document.getElementById('details').innerHTML=post.chiTiet;		
+				                    idLoaiVe = post.idLoaiVe ;	                   
+		
+								
+				                }
+						});
+					});
+
+			})	
+
+			var one = document.getElementById("one");
+			var two = document.getElementById("two");
+			var three = document.getElementById("three");
+			one.addEventListener('click', function(){	
+				SoLuong = one.value;											
+				document.getElementById("cost").innerHTML = giaVe*SoLuong;			
+			})
+						      
+			two.addEventListener('click', function(){
+				SoLuong = two.value;															
+				document.getElementById("cost").innerHTML = giaVe*SoLuong;
+			})
+				            
+			three.addEventListener('click', function(){
+				SoLuong = three.value;
+				document.getElementById("cost").innerHTML = giaVe*SoLuong;
+				
+			});
+		
+
+	
 }
 
 
