@@ -12,8 +12,10 @@ namespace Band.Data.Entities
         public DateTime ThoiDiemBieuDien { get; set; }
         public DateTime ThoiDiemMoBan { get; set; }
         public string DiaDiem { get; set; }
+        public int IdNhom { get; set; }
+        public NhomNhac NhomNhac { get; set; }
         public List<ShowVsHinhAnh> DsShowVsHinhAnh { set; get; }
-        public List<ShowVsLoaiVe> DsShowVsLoaiVe { get; set; }
+        public List<ChiTietLoaiVe> DsChiTietLoaiVe { set; get; }
 
     }
 }

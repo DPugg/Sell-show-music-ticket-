@@ -262,7 +262,8 @@ namespace Band.ManageApp
                     QuocTich=nationTxtBox.Text,
                     TenKhaiSinh=nameTxtBox.Text,
                     TieuSu=storyTxtBox.Text,
-                    Twitter=twitterTxtBox.Text
+                    Twitter=twitterTxtBox.Text,
+                    TrangThai = txtHoatDong.Text
                 };
                 var response = _thanhVienApiClient.UpdateThanhVien(request);
                 if (response)

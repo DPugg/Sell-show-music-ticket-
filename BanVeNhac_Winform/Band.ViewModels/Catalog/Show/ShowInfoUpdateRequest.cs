@@ -13,5 +13,6 @@ namespace Band.ViewModels.Catalog.Show
         public DateTime NgayMoBan { get; set; }
         public DateTime GioMoBan { get; set; }
         public string DiaDiem { get; set; }
+        public int IdNhom { get; set; }
     }
 }

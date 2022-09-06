@@ -168,6 +168,9 @@ namespace Band.ManageApp
                 editShowInfoBtn.Hide();
                 editTicketInfoBtn.Hide();
                 ticketsTbl.ReadOnly = false;
+                saveShowInfoBtn.Hide();
+                saveTiketInfoBtn.Hide();
+                
                 foreach (DataGridViewRow row in ticketsTbl.Rows)
                 {
                     for (int i = 0; i < row.Cells.Count; i++)
@@ -298,6 +301,7 @@ namespace Band.ManageApp
                 ticketsTbl.Rows[i].Cells[0].Value = show.DsChiTietLoaiVe[i].IdLoaiVe;
                 ticketsTbl.Rows[i].Cells[1].Value = show.DsChiTietLoaiVe[i].Gia;
                 ticketsTbl.Rows[i].Cells[2].Value = show.DsChiTietLoaiVe[i].SoLuongBanRa;
+      //          ticketsTbl.Rows[i].Cells[3].Value = show.DsChiTietLoaiVe[i].SoLuongConLai;
             }
         }
 
@@ -397,6 +401,7 @@ namespace Band.ManageApp
                 performDatebox.Enabled = false;
                 performTimeBox.Enabled = false;
                 saveTiketInfoBtn.Enabled = false;
+                saveShowInfoBtn.Enabled = false;
             }
             else
             {
@@ -408,6 +413,7 @@ namespace Band.ManageApp
                 performDatebox.Enabled = true;
                 performTimeBox.Enabled = true;
                 saveTiketInfoBtn.Enabled = true;
+                saveShowInfoBtn.Enabled = true;
             }
         }
 
@@ -437,6 +443,28 @@ namespace Band.ManageApp
         {
             ShowGetAllViewModel tmp = new ShowGetAllViewModel();
             tmp = (ShowGetAllViewModel)showsComboBox.SelectedValue;
+
+            if (checkNull(nameTxtBox.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên show diễn!");
+                nameTxtBox.Focus();
+                return;
+            }
+            else if (checkNull(locationTxtBox.Text))
+            {
+                MessageBox.Show("Vui lòng nhập địa điểm diễn ra show diễn!");
+                locationTxtBox.Focus();
+                return;
+            }
+            if (saleDateBox.Value >= performDatebox.Value.AddDays(-1))
+            {
+                if (saleTimeBox.Value >= performTimeBox.Value)
+                {
+                    MessageBox.Show("Thời gian mở bán vé phải nhỏ hơn ngày biểu diễn!");
+                    return;
+                }
+            }
+            
             var showInfoUpdateRequest = new ShowInfoUpdateRequest()
             {
                 IdShow= tmp.IdShow,
@@ -610,13 +638,14 @@ namespace Band.ManageApp
                 locationTxtBox.Focus();
                 return;
             }
-            if (saleDateBox.Value >= performDatebox.Value)
+            if (saleDateBox.Value >= performDatebox.Value.AddDays(-1))
             {
                 MessageBox.Show("Thời gian mở bán vé phải nhỏ hơn ngày biểu diễn!");
                 return;
+                
             }
-            
-            
+
+
 
             //Kiểm tra danh sách loại vé
             var dsChiTietVe = new List<ChiTietVeViewModel>();
@@ -656,7 +685,7 @@ namespace Band.ManageApp
             };
             if (_showsApiClient.Create(showCreateRequest))
             {
-                MessageBox.Show("Thành công!  "+dsChiTietVe);
+                MessageBox.Show("Thành công!  ");
                 Read();
                 
             }
@@ -705,12 +734,17 @@ namespace Band.ManageApp
                 {
                     if (IsNumber(row.Cells[1].Value.ToString()))
                     {
+                        if(Convert.ToDecimal(row.Cells[1].Value.ToString()) ==0|| Convert.ToInt32(row.Cells[2].Value.ToString()) == 0)
+                        {
+                            return -8;
+                        }
                         result.Add(new ChiTietVeViewModel()
                         {
                             IdLoaiVe = (int)row.Cells[0].Value,
                             Gia = Convert.ToDecimal(row.Cells[1].Value.ToString()),
-                            SoLuongBanRa = Convert.ToInt32(row.Cells[2].Value.ToString())
-                        });
+                            SoLuongBanRa = Convert.ToInt32(row.Cells[2].Value.ToString()),
+                        }) ;
+                        
                     }
                     else
                     {
@@ -742,7 +776,12 @@ namespace Band.ManageApp
         private void ticketsTbl_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 1)
-            {
+            {   
+                if(ticketsTbl.Rows[e.RowIndex].Cells[1].Value == "")
+                {
+                    MessageBox.Show("không được để trống thông tin");
+                    return;
+                }
                 double price = Convert.ToDouble(ticketsTbl.Rows[e.RowIndex].Cells[1].Value);
                 ticketsTbl.Columns[1].DefaultCellStyle.Format = "c0";
                 ticketsTbl.Columns[1].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("vi-VN");
@@ -754,6 +793,7 @@ namespace Band.ManageApp
         {
             var dsChiTietVe = new List<ChiTietVeViewModel>();
             int errorNum= getDsLoaiVeFromDGV(ref dsChiTietVe);
+           
             if (errorNum == -1) //Thiếu thông tin loại vé
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin loại vé!");
@@ -764,13 +804,24 @@ namespace Band.ManageApp
                 MessageBox.Show("Danh sách các loại vé không được trùng nhau!");
                 return;
             }    
+            
+            else if(errorNum == -8)
+            {
+                MessageBox.Show("vui lòng kiểm tra lại thông tin");
+                return;
+            }
+            if (dsChiTietVe.Count == 0)
+            {
+                MessageBox.Show("Thêm vé cho show");
+                return;
+            }
             else
             {
                 ShowGetAllViewModel tmp = (ShowGetAllViewModel)showsComboBox.SelectedValue;
                 var request = new TicketInfoUpdateRequest()
                 {
                     IdShow = tmp.IdShow,
-                    dsChiTietVe = dsChiTietVe
+                    dsChiTietVe = dsChiTietVe,
                 };
                 
                     

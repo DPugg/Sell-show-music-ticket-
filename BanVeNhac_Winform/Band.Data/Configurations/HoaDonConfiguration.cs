@@ -17,7 +17,7 @@ namespace Band.Data.Configurations
             builder.Property(x => x.SoLuong).HasDefaultValue(1).IsRequired();
             builder.Property(x => x.SDT).IsUnicode(false).IsRequired(true).HasMaxLength(10);
             builder.Property(x => x.NgayGiaoDich).IsRequired();
-            builder.HasOne(x => x.ShowVsLoaiVe).WithMany(x => x.DsHoaDon).HasForeignKey(x => x.IdShowVsLoaiVe).HasPrincipalKey(x=>x.IdShowVsLoaiVe);
+            builder.HasOne(x => x.KhachHang).WithMany(x => x.DsHoaDon).HasForeignKey(x => x.SDT).IsRequired();
         }
     }
 }

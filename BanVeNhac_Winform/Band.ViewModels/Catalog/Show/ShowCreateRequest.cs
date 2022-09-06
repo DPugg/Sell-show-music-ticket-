@@ -12,6 +12,7 @@ namespace Band.ViewModels.Catalog.Show
         public DateTime NgayMoBan { get; set; }
         public DateTime GioMoBan { get; set; }
         public string DiaDiem { get; set; }
+        public int IdNhom { get; set; }
         public List<byte[]> DsHinhAnh { get; set; }
         public List<ChiTietVeViewModel> DsChiTietLoaiVe { get; set; }
     }

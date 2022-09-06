@@ -49,6 +49,24 @@ var payment = SoLuong*giaVe;
 var SLMax = 3;
 var validate_SoLuong;
 var validate_loaiVe;
+
+function sendEmail(){ 
+	Email.send({
+		Host : "smtp.elasticemail.com",
+		Username : "examplemail1638@gmail.com",
+		Password : "CABE18D24460A06862F6E544902426FF1D19",
+	//	SecureToken: "82b11689-0754-4d54-b472-96993ca3e922",
+		To : 'dvphuong1408@gmail.com',
+		From : "examplemail1638@gmail.com",
+		Subject : "This is the subject",
+		Body : "And this is the body"
+	}).then(
+	  message => alert(message)
+	);
+
+}
+
+
 function reply_click(clicked_id)
   {	
 	IdShow = document.getElementById(clicked_id).id;
@@ -72,14 +90,45 @@ function reply_click(clicked_id)
 //		console.log(member.dsChiTietLoaiVe)
 		dsCTLoaiVe = member.dsChiTietLoaiVe;
 		console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
+
+//================mo page booking======================
+				
+		var showPlaceMember = document.querySelector(".booking_body")
+		var htmlsPlace = membersTv.map(function(showMember) {
+			return
+			 `
+			<div class="booking_showInfo">
+				<div class="booking_imgShow">
+					<img src="data:image/png;base64,${showMember.hinhAnh}" alt="" width="100%" height="100%">
+				</div>
+				<div class="booking_info">
+					<div class="booking_TenShow">
+						Tên Show: ${showMember.tenShow}
+					</div>
+					<div class="booking_DiaDiem">
+						Địa Điểm: ${showMember.diaDiem}
+					</div>
+					<div class="booking_ngayBieuDien">
+						Ngày Biểu Diễn: ${showMember.thoiDiemBieuDien}
+					</div>
+					<div class="booking_GioiThieu">
+						
+					</div>
+		
+				</div>
+			</div>
+		  `;
+		
+		});
+		showPlaceMember.innerHTML = htmlsPlace.join('');
+
 	  })
 		
 
        .catch((error) => {
          console.error('Error:', error);
        });
-			 
-				 
+			 				 
   }
 
   
@@ -112,8 +161,8 @@ function reply_click(clicked_id)
 	}
 	
 	//====================================hien thong tin thanh vien====================================
-//====================================hien thong tin thanh vien====================================
-//https://localhost:44315/api/thanhvien/public/by-id?idThanhVien=1
+	//====================================hien thong tin thanh vien====================================
+	//https://localhost:44315/api/thanhvien/public/by-id?idThanhVien=1
 function memberInfor(clicked_id) {
 	console.log(clicked_id);
 	var url = new URL('https://localhost:44315/api/thanhvien/public/by-id')
@@ -191,17 +240,16 @@ function memberInfor(clicked_id) {
          //ham hien phan mua ve (them class openModel vao the model)
          function showBuyTicket(){
              model.classList.add('openModel')     
-           //  IdShow = documemt.getElementById('this.id').name;
-             //console.log(IdShow);
+           	//IdShow = documemt.getElementById('this.id').name;
+            //console.log(IdShow);
          }
          function showMember_infor(){
              model_member.classList.add('openModel')
              
          }
-         function showBill(){
-        	 modal_bill.classList.add('openModel')
-         }
-         
+ //        function showBill(){
+ //       	 modal_bill.classList.add('openModel')
+  //       }      
          //ham an pham mua ve (xoa class openModel di)
          function hideBuyTicket(){
              model.classList.remove('openModel')
@@ -261,7 +309,7 @@ function memberInfor(clicked_id) {
 
 		var htmls = members.map(function(member) {
 
-				
+
 				return `
       			<div class="ticket-place-item" >
 					<img class="ticket-img" id="show-img" src="data:image/png;base64,${member.hinhAnh}"
@@ -271,7 +319,10 @@ function memberInfor(clicked_id) {
 						<p class="time" id="show-time">Thời điểm mở bán: ${member.thoiDiemMoBan}</p>
 						
 						<p class="describe">Địa Điểm: ${member.diaDiem}</p>
-						<button class="buy-ticket" id="${member.idShow}" name="1" onClick="reply_click(${member.idShow})">Buy Tickets</button>
+						<button class="buy-ticket" id="${member.idShow}" name="1" >
+							
+							<a onClick="reply_click(${member.idShow})" href="./booking.html" width: 20px height: 10px>Buy Tickets</a>
+						</button>
 					</div>
 				</div>
       		`;
@@ -403,8 +454,7 @@ var btnPay = document.getElementById('pay');
 													return;
 				                            	}
 				                            	if(data === -6){
-				                            		//showBill();
-				                            		//showBillInfo(7);
+				                            	
 				                            		alert("Ngoài thời gian đặt vé");
 													console.log(data);
 				                            	}
@@ -458,6 +508,19 @@ document.getElementById('pay').onclick= function(){
 				console.log("thanh toán thành công");
 				showBill();
 				showBillInfo(data);
+
+
+				Email.send({
+					Host : "smtp.yourisp.com",
+					Username : "n18dccn157@student.ptithcm.edu.vn",
+					Password : "n18dccn157#140800",
+					To : email,
+					From : "n18dccn157@student.ptithcm.edu.vn",
+					Subject : "concert Bill",
+					Body : "And this is the body"
+				}).then(
+				  message => alert(message)
+				);
 				
 			}
 			else if(data == -1){
@@ -465,7 +528,7 @@ document.getElementById('pay').onclick= function(){
 				return;
 			}
 			else if(data == -3){
-				alert("Số tài khoản không đúng, vui lòng kiểm tra lại");
+				alert("không tìm thấy thông tin, vui lòng kiểm tra lại");
 				return;
 			}
 		})
@@ -550,6 +613,7 @@ document.getElementById('pay').onclick= function(){
 			normal.addEventListener('click', function(){
 				giaVe;
 				let i = 0;
+				let flag = 0;
 				//===========giá vé
 				console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
 				while (i < dsCTLoaiVe.length){
@@ -557,14 +621,17 @@ document.getElementById('pay').onclick= function(){
 					if(dsCTLoaiVe[i].idLoaiVe == 1){
 						giaVe = dsCTLoaiVe[i].gia;
 						console.log(dsCTLoaiVe[i].gia + "............"+giaVe);
+						flag =1;
 						break;
 					}
-					else{
-						 alert("ve loai nay da het hoac khong ban 1");
-						giaVe = "0";						
-					}
+					
 					
 					i++;
+				}
+				if(flag == 0){
+					
+					alert("ve loai nay da het hoac khong ban");
+					giaVe = "0";										   
 				}
 				document.getElementById('giaVe').innerHTML = giaVe;
 
@@ -589,24 +656,27 @@ document.getElementById('pay').onclick= function(){
 			vip.addEventListener('click', function(){
 				giaVe;
 				let i = 0;
+				let flag = 0;
 				console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
 				//==============loại vé
 				while (i < dsCTLoaiVe.length){
 					console.log(dsCTLoaiVe[i]);
 					
 					if(dsCTLoaiVe[i].idLoaiVe == 2){
+						flag = 1;
 						giaVe = dsCTLoaiVe[i].gia;
-						console.log(dsCTLoaiVe[i].gia + "........."+giaVe);					
+						console.log(dsCTLoaiVe[i].gia + "........."+giaVe);			
+								
 						break;
-					}
-					else{
-						giaVe = "0";
-						alert("ve loai nay da het hoac khong ban 2");
-												
-					}
-					
+					}									
 					i++;
 				}
+				if(flag == 0){
+					
+					alert("ve loai nay da het hoac khong ban");
+					giaVe = "0";										   
+				}
+				
 				document.getElementById('giaVe').innerHTML = giaVe;
 
 				//=============chi tiết vé
@@ -630,23 +700,23 @@ document.getElementById('pay').onclick= function(){
 			vvip.addEventListener('click', function(){
 				giaVe;
 				let i = 0;
+				let flag = 0;
 				console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
 				//==============giá vé
 				while (i < dsCTLoaiVe.length){
 					console.log(dsCTLoaiVe[i]);
 					if(dsCTLoaiVe[i].idLoaiVe == 3){
+						flag = 1;
 						giaVe = dsCTLoaiVe[i].gia;
 						console.log(dsCTLoaiVe[i].gia + "........."+giaVe);											
 						break;
-					}
-					else{
-						alert("ve loai nay da het hoac khong ban 3");
-						giaVe = "0";						
-
-					}
-					
-					
+					}				
 					i++;
+				}
+				if(flag == 0){
+					
+					alert("ve loai nay da het hoac khong ban");
+					giaVe = "0";										   
 				}
 				document.getElementById('giaVe').innerHTML = giaVe;
 

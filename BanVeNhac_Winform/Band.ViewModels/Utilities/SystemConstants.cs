@@ -15,6 +15,12 @@ namespace Band.ViewModels.Utilities
             UPDATE_POSITION,
             DELETE,
         }
+
+        public enum nhapLieuError
+        {
+            So0 = -8,
+            Null = -9
+        }
         public enum ImageType
         {
             AVATAR_MEM=1,

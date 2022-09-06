@@ -35,16 +35,21 @@ namespace Band.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "NGANHANG",
+                name: "KHACHHANG",
                 columns: table => new
                 {
-                    IdTaiKhoan = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false),
-                    MatKhau = table.Column<string>(type: "varchar(330)", maxLength: 330, nullable: false),
-                    SoDu = table.Column<decimal>(type: "numeric", nullable: false, defaultValue: 0m)
+                    SDT = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SoDu = table.Column<decimal>(type: "numeric", nullable: false, defaultValue: 0m),
+                    TenKhachHang = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable:true),
+                    SoTaiKhoan = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: false),
+                    NganHang = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+
+
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NGANHANG", x => x.IdTaiKhoan);
+                    table.PrimaryKey("PK_NGANHANG", x => x.SDT);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,11 +81,19 @@ namespace Band.Data.Migrations
                     TenShow = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ThoiDiemBieuDien = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ThoiDiemMoBan = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DiaDiem = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                    DiaDiem = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    IdNhom = table.Column<int>(type: "int", nullable: true),
+
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SHOW", x => x.IdShow);
+                    table.ForeignKey(
+                        name: "FK_SHOW_NHOMNHAC",
+                        column: x => x.IdNhom,
+                        principalTable: "NHOMNHAC",
+                        principalColumn: "IdNhom",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,7 +151,7 @@ namespace Band.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CHITIETVE_SHOW",
+                name: "CHITIETLOAIVE",
                 columns: table => new
                 {
                     IdShow = table.Column<int>(type: "int", nullable: false),
@@ -248,17 +261,17 @@ namespace Band.Data.Migrations
                     SoLuong = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
                     SDT = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     NgayGiaoDich = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdShowVsLoaiVe = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HOADON", x => x.IdHoaDon);
                     table.ForeignKey(
-                        name: "FK_HOADON_CHITIETVE_SHOW_IdShowVsLoaiVe",
-                        column: x => x.IdShowVsLoaiVe,
-                        principalTable: "CHITIETVE_SHOW",
-                        principalColumn: "IdShowVsLoaiVe",
+                        name: "FK_HOADON_KHACHHANG",
+                        column: x => x.SDT,
+                        principalTable: "KHACHHANG",
+                        principalColumn: "SDT",
                         onDelete: ReferentialAction.Cascade);
+
                 });
 
             migrationBuilder.CreateTable(
@@ -266,18 +279,27 @@ namespace Band.Data.Migrations
                 columns: table => new
                 {
                     MaSoVe = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false),
-                    IDHoaDon = table.Column<int>(type: "int", nullable: false)
+                    IdShowVsLoaiVe = table.Column<int>(type: "int", nullable: false),
+                    IdHoaDon = table.Column<int>(type:"int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VE", x => x.MaSoVe);
                     table.ForeignKey(
-                        name: "FK_VE_HOADON_IDHoaDon",
-                        column: x => x.IDHoaDon,
+                        name: "FK_VE_CHITIETLOAIVE",
+                        column: x => x.IdShowVsLoaiVe,
+                        principalTable: "CHITIETLOAIVE",
+                        principalColumn: "IdShowVsLoaiVe",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VE_HOADON",
+                        column: x => x.IdHoaDon,
                         principalTable: "HOADON",
                         principalColumn: "IdHoaDon",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                ;
+           
 
             migrationBuilder.CreateIndex(
                 name: "IX_ANHTHANHVIEN_IdThanhVien",
@@ -286,7 +308,7 @@ namespace Band.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_CHITIETVE_SHOW_IdShow",
-                table: "CHITIETVE_SHOW",
+                table: "CHITIETLOAIVE",
                 column: "IdShow");
 
             migrationBuilder.CreateIndex(
@@ -299,12 +321,12 @@ namespace Band.Data.Migrations
                 table: "HOADON",
                 column: "IdShowVsLoaiVe");
 
-            migrationBuilder.CreateIndex(
+    /*        migrationBuilder.CreateIndex(
                 name: "IX_NGANHANG_IdTaiKhoan",
                 table: "NGANHANG",
                 column: "IdTaiKhoan",
                 unique: true);
-
+*/
             migrationBuilder.CreateIndex(
                 name: "IX_SHOW_HINHANH_IdShow",
                 table: "SHOW_HINHANH",
@@ -327,7 +349,7 @@ namespace Band.Data.Migrations
                 name: "ANHTHANHVIEN");
 
             migrationBuilder.DropTable(
-                name: "NGANHANG");
+                name: "KHACHHANG");
 
             migrationBuilder.DropTable(
                 name: "NHOMNHAC");
@@ -357,13 +379,16 @@ namespace Band.Data.Migrations
                 name: "LOAIANH");
 
             migrationBuilder.DropTable(
-                name: "CHITIETVE_SHOW");
+                name: "CHITIETLOAIVE");
 
             migrationBuilder.DropTable(
                 name: "LOAIVE");
 
             migrationBuilder.DropTable(
                 name: "SHOW");
+
+           
+
         }
     }
 }

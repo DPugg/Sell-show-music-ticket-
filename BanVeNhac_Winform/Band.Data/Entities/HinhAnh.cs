@@ -13,7 +13,7 @@ namespace Band.Data.Entities
         public byte[] Anh { get; set; }
         public int IdLoai { get; set; }
         public LoaiAnh LoaiAnh { get; set; }
-        public List<ThanhVienVsHinhAnh> DsThanhVienVsHinhAnh { set; get; }
+        public List<AnhThanhVien> DsAnhThanhVien { set; get; }
         public List<ShowVsHinhAnh> DsShowVsHinhAnh { set; get; }
 
 

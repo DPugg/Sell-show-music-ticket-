@@ -61,7 +61,6 @@ namespace Band.ManageApp
             this.saveTiketInfoBtn = new System.Windows.Forms.Button();
             this.totalPrice = new System.Windows.Forms.Label();
             this.totalTickets = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.detailTicketTxtBox = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -325,7 +324,6 @@ namespace Band.ManageApp
             this.panel4.Controls.Add(this.saveTiketInfoBtn);
             this.panel4.Controls.Add(this.totalPrice);
             this.panel4.Controls.Add(this.totalTickets);
-            this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.detailTicketTxtBox);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.label10);
@@ -349,7 +347,7 @@ namespace Band.ManageApp
             // addTicketType
             // 
             this.addTicketType.Image = ((System.Drawing.Image)(resources.GetObject("addTicketType.Image")));
-            this.addTicketType.Location = new System.Drawing.Point(24, 35);
+            this.addTicketType.Location = new System.Drawing.Point(2, 9);
             this.addTicketType.Name = "addTicketType";
             this.addTicketType.Size = new System.Drawing.Size(23, 19);
             this.addTicketType.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -408,15 +406,6 @@ namespace Band.ManageApp
             this.totalTickets.Size = new System.Drawing.Size(0, 15);
             this.totalTickets.TabIndex = 16;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 147);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 15);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Tổng cộng:";
-            // 
             // detailTicketTxtBox
             // 
             this.detailTicketTxtBox.Location = new System.Drawing.Point(550, 41);
@@ -462,13 +451,13 @@ namespace Band.ManageApp
             this.priceTicketCol,
             this.quantityTicketCol,
             this.deleteBtnCol});
-            this.ticketsTbl.Location = new System.Drawing.Point(53, 35);
+            this.ticketsTbl.Location = new System.Drawing.Point(3, 44);
             this.ticketsTbl.MultiSelect = false;
             this.ticketsTbl.Name = "ticketsTbl";
             this.ticketsTbl.ReadOnly = true;
             this.ticketsTbl.RowHeadersVisible = false;
             this.ticketsTbl.RowTemplate.Height = 25;
-            this.ticketsTbl.Size = new System.Drawing.Size(430, 98);
+            this.ticketsTbl.Size = new System.Drawing.Size(483, 97);
             this.ticketsTbl.TabIndex = 0;
             this.ticketsTbl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ticketsTbl_CellContentClick);
             this.ticketsTbl.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ticketsTbl_CellEndEdit);
@@ -570,7 +559,6 @@ namespace Band.ManageApp
         private System.Windows.Forms.DateTimePicker saleTimeBox;
         private System.Windows.Forms.DateTimePicker saleDateBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox locationTxtBox;
@@ -590,9 +578,6 @@ namespace Band.ManageApp
         private System.Windows.Forms.Label totalPrice;
         private System.Windows.Forms.Label totalTickets;
         private System.Windows.Forms.RichTextBox detailTicketTxtBox;
-        private System.Windows.Forms.DataGridViewComboBoxColumn tiketTypeCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priceTicketCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantityTicketCol;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox2;
@@ -602,9 +587,13 @@ namespace Band.ManageApp
         private System.Windows.Forms.Button saveTiketInfoBtn;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button saveBtn;
-        private System.Windows.Forms.DataGridViewButtonColumn deleteBtnCol;
         private System.Windows.Forms.Button deleteShowBtn;
         private System.Windows.Forms.PictureBox addTicketType;
         private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn tiketTypeCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceTicketCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantityTicketCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ConLaiCol;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteBtnCol;
     }
 }

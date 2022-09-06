@@ -15,6 +15,8 @@ namespace Band.Data.Configurations
             builder.Property(x => x.ThoiDiemBieuDien).IsRequired();
             builder.Property(x => x.ThoiDiemMoBan).IsRequired();
             builder.Property(x => x.DiaDiem).HasMaxLength(255).IsRequired();
+
+            builder.HasOne(x => x.NhomNhac).WithMany(x => x.DsShow).HasForeignKey(x => x.IdNhom).IsRequired();
         }
     }
 }

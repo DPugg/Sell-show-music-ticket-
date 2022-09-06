@@ -55,7 +55,7 @@ namespace Band.Api.Controllers
         {
             var result = await _manageShowService.Create(request);
             if (result == 0)
-                return BadRequest();
+                return BadRequest("vui lòng kiểm tra lại thông tin");
             return Ok(true);
         }
         [HttpGet("byid")]

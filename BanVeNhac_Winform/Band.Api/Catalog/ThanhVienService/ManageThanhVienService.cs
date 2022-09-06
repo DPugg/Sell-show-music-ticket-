@@ -84,28 +84,28 @@ namespace Band.Api.Catalog.ThanhVienService
                 Instagram = request.Instagram,
                 Twitter = request.Twitter,
                 TrangThai = hoatdong,
-                DsThanhVienVsHinhAnh = new List<ThanhVienVsHinhAnh>(),
+                DsAnhThanhVien = new List<AnhThanhVien>(),
                 DsThanhVienVsVaiTro=new List<ThanhVienVsVaiTro>()
                 /*DsThanhVienVsHinhAnh = dsThanhVienVsHinhAnh*/
             };
             
             foreach(var img in dsAvatar)
             {
-                ThanhVienVsHinhAnh thanhVienVsHinhAnh = new ThanhVienVsHinhAnh()
+                AnhThanhVien thanhVienVsHinhAnh = new AnhThanhVien()
                 {
                     HinhAnh = img,
                     ThanhVien = thanhVien
                 };
-                thanhVien.DsThanhVienVsHinhAnh.Add(thanhVienVsHinhAnh);
+                thanhVien.DsAnhThanhVien.Add(thanhVienVsHinhAnh);
             }
             foreach (var img in dsCover)
             {
-                ThanhVienVsHinhAnh thanhVienVsHinhAnh = new ThanhVienVsHinhAnh()
+                AnhThanhVien thanhVienVsHinhAnh = new AnhThanhVien()
                 {
                     HinhAnh = img,
                     ThanhVien = thanhVien
                 };
-                thanhVien.DsThanhVienVsHinhAnh.Add(thanhVienVsHinhAnh);
+                thanhVien.DsAnhThanhVien.Add(thanhVienVsHinhAnh);
             }
             foreach (var vaiTro in dsVaiTroCu)
             {
@@ -290,10 +290,10 @@ namespace Band.Api.Catalog.ThanhVienService
                     IdLoai = request.IdLoai
                 });
             }
-            List<ThanhVienVsHinhAnh> dsThanhVienVsHinhAnh = new List<ThanhVienVsHinhAnh>();
+            List<AnhThanhVien> dsThanhVienVsHinhAnh = new List<AnhThanhVien>();
             foreach (var img in dsHinhAnh)
             {
-                ThanhVienVsHinhAnh thanhVienVsHinhAnh = new ThanhVienVsHinhAnh()
+                AnhThanhVien thanhVienVsHinhAnh = new AnhThanhVien()
                 {
                     HinhAnh = img,
                     IdThanhVien = request.IdThanhVien
@@ -358,7 +358,7 @@ namespace Band.Api.Catalog.ThanhVienService
                 dsHinhAnh.Add(await _context.HinhAnhDbo.FindAsync(i));
             }
 
-            var dsThanhVienVsHinhAnh = new List<ThanhVienVsHinhAnh>();
+            var dsThanhVienVsHinhAnh = new List<AnhThanhVien>();
             foreach (var i in listIdAnh)
             {
                 dsThanhVienVsHinhAnh.Add((from h in _context.ThanhVienVsHinhAnhDbo

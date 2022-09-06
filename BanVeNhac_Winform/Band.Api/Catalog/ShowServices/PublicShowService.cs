@@ -24,8 +24,9 @@ namespace Band.Api.Catalog.ShowServices
         public static string STK_nh ;
         public static string SDT;
         public static int SoLuong;
-        public static ShowVsLoaiVe chiTietVe;
+        public static ChiTietLoaiVe chiTietVe;
         public static decimal TotalCost;
+        public static Ve ve;
 
 
         public PublicShowService(BandDbContext context)
@@ -184,8 +185,9 @@ namespace Band.Api.Catalog.ShowServices
             var show = await _context.ShowDbo.FindAsync(request.IdShow);
             if (show.ThoiDiemMoBan > DateTime.Now || show.ThoiDiemBieuDien < DateTime.Now.AddHours(1)) return (int)BookingErrorCode.OFF_HOURS;
             var tmpHoaDon = await (from h in _context.HoaDonDbo
-                                   join sl in _context.ShowVsLoaiVeDbo on h.IdShowVsLoaiVe equals sl.IdShowVsLoaiVe
-                                   where sl.IdShow.Equals(request.IdShow) && h.SDT.Equals(request.SDT)
+                                   join v in _context.VeDbo on h.IdHoaDon equals v.IdHoaDon
+                                   join sv in _context.ShowVsLoaiVeDbo on v.IdShowVsLoaiVe equals sv.IdShowVsLoaiVe
+                                   where sv.IdShow.Equals(request.IdShow) && h.SDT.Equals(request.SDT)
                                    select h).FirstOrDefaultAsync();
             if (tmpHoaDon != null) return (int)BookingErrorCode.BOOKED;
 
@@ -205,8 +207,8 @@ namespace Band.Api.Catalog.ShowServices
 
             //=====================gui mail ma xac nhan===============
             var STK = await (from bank in _context.BankDbo
-                             where bank.IdTaiKhoan.Equals(request.Account)
-                             select bank.IdTaiKhoan).FirstOrDefaultAsync();
+                             where bank.SoTaiKhoan.Equals(request.Account)
+                             select bank.SoTaiKhoan).FirstOrDefaultAsync();
             if(STK != null)
             {
                 MaXacNhan = layMaXacNhan();
@@ -218,20 +220,28 @@ namespace Band.Api.Catalog.ShowServices
         }
 
 
-
-
         public async Task<HoaDonVm> GetHoaDonById(int idHoaDon)
         {
             var hoaDon = await _context.HoaDonDbo.FindAsync(idHoaDon);
-            var dsVeFromDb = await (from h in _context.HoaDonDbo
-                                    join v in _context.VeDbo on h.IdHoaDon equals v.IDHoaDon
-                                    where h.IdHoaDon.Equals(idHoaDon)
-                                    select v.MaSoVe).ToListAsync();
-            var showVsLoaiVe = await (from sv in _context.ShowVsLoaiVeDbo
+
+            /*
+                        var dsVeFromDb = await (from h in _context.HoaDonDbo
+                                                join v in _context.ChiTietHoaDonDbo on h.IdHoaDon equals v.IdHoaDon
+                                                join k in _context.VeDbo on v.MaSoVe equals k.MaSoVe
+                                                where h.IdHoaDon.Equals(idHoaDon)
+                                                select v.MaSoVe).ToListAsync();
+            */
+            var dsVeFromDb = await (from h in _context.VeDbo
+                                              join hd in _context.HoaDonDbo on h.IdHoaDon equals hd.IdHoaDon
+                                              where h.IdHoaDon.Equals(hoaDon.IdHoaDon)
+                                              select h.MaSoVe).ToListAsync();
+
+            var ChiTietVe = await (from sv in _context.ShowVsLoaiVeDbo
                               join s in _context.ShowDbo on sv.IdShow equals s.IdShow
-                              where sv.IdShowVsLoaiVe.Equals(hoaDon.IdShowVsLoaiVe)
+                              join v in _context.VeDbo on sv.IdShowVsLoaiVe equals v.IdShowVsLoaiVe
+                              where v.IdHoaDon.Equals(idHoaDon)
                               select new { s.DiaDiem, s.TenShow, s.ThoiDiemBieuDien, sv.Gia, sv.IdLoaiVe }).FirstOrDefaultAsync();
-            var loaiVe = await _context.LoaiVeDbo.FindAsync(showVsLoaiVe.IdLoaiVe);
+            var loaiVe = await _context.LoaiVeDbo.FindAsync(ChiTietVe.IdLoaiVe);
             var dsVe = new List<string>();
             foreach(var x in dsVeFromDb)
             {
@@ -239,16 +249,16 @@ namespace Band.Api.Catalog.ShowServices
             }
             var result = new HoaDonVm()
             {
-                DiaDiem = showVsLoaiVe.DiaDiem,
+                DiaDiem = ChiTietVe.DiaDiem,
                 DsMaSoVe = dsVe,
-                Gia = showVsLoaiVe.Gia,
+                Gia = ChiTietVe.Gia,
                 IdHoaDon = hoaDon.IdHoaDon,
                 NgayGiaoDich = hoaDon.NgayGiaoDich,
                 SDT = hoaDon.SDT,
                 SoLuong = hoaDon.SoLuong,
                 TenLoai = loaiVe.TenLoai,
-                TenShow = showVsLoaiVe.TenShow,
-                ThoiDiemBieuDien = showVsLoaiVe.ThoiDiemBieuDien
+                TenShow = ChiTietVe.TenShow,
+                ThoiDiemBieuDien = ChiTietVe.ThoiDiemBieuDien
             };
             return result;
         }
@@ -259,11 +269,11 @@ namespace Band.Api.Catalog.ShowServices
             {
                 AllowPayment = 1;
                 
-                var srcAcc = await _context.BankDbo.FindAsync(STK_nh);
+                var srcAcc = await _context.BankDbo.FindAsync(SDT);
                 if (srcAcc == null) return (int)BankErrorCode.LOGIN_FAILED;
 
+                
 
- 
                 if (srcAcc.SoDu < TotalCost) return (int)BankErrorCode.BALANCE_NOT_ENOUGH;
                 else
                 {
@@ -272,12 +282,11 @@ namespace Band.Api.Catalog.ShowServices
                     _context.SaveChanges();
 
                     //  return await _context.SaveChangesAsync();
-
+                    
                     var hoaDon = new HoaDon()
                     {
                         SoLuong = SoLuong,
                         SDT = SDT,
-                        IdShowVsLoaiVe = chiTietVe.IdShowVsLoaiVe,
                  //       ShowVsLoaiVe = chiTietVe,
                         NgayGiaoDich = DateTime.Now,
                         DsVe = new List<Ve>()
@@ -287,31 +296,35 @@ namespace Band.Api.Catalog.ShowServices
                     _context.HoaDonDbo.Add(hoaDon);
                     _context.SaveChanges();
 
+
                     Random ran = new Random();
                     int preRanNumber = -1;
+                  
                     for (int i = 0; i < SoLuong; i++)
                     {
                         int randomNum = ran.Next(1000);
                         while (randomNum == preRanNumber)
                             randomNum = ran.Next(1000);
-                        hoaDon.DsVe.Add(new Ve()
+                        ve = new Ve()
                         {
-                            IDHoaDon =hoaDon.IdHoaDon,
-                       //     HoaDon = hoaDon,
-                            MaSoVe = i.ToString() + hoaDon.NgayGiaoDich.ToString("MMddyyyyhhmmssfffffff") + $"{randomNum}".PadLeft(3, '0')
-                        });
+                            MaSoVe = i.ToString() + hoaDon.NgayGiaoDich.ToString("MMddyyyyhhmmssfffffff") + $"{randomNum}".PadLeft(3, '0'),
+                            IdShowVsLoaiVe = chiTietVe.IdShowVsLoaiVe,
+                            IdHoaDon = hoaDon.IdHoaDon
+                        };
+                        _context.VeDbo.Add(ve);
+                       
                         preRanNumber = randomNum;
                     }
                         chiTietVe.ConLai -= SoLuong;
                     //               await _context.SaveChangesAsync();
                     //await _context.AddRangeAsync();
+
                     _context.ShowVsLoaiVeDbo.Update(chiTietVe);
                     _context.SaveChanges();
+
+
                     return hoaDon.IdHoaDon;
                 }
-                
-                
-                
 
             }
             else

@@ -48,6 +48,10 @@ namespace Band.ManageApp
 
         private void fillBtn_Click(object sender, EventArgs e)
         {
+            if(toDateBox.Value <= fromDateBox.Value)
+            {
+                MessageBox.Show("thời gian sau phải lớn hơn thời gian trước");
+            }
             if (statiscalDGV.Rows[0].Cells[2].Value != null)
             {
                 

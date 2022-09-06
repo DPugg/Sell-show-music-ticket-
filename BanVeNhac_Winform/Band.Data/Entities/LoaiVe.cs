@@ -11,7 +11,7 @@ namespace Band.Data.Entities
         public string TenLoai { get; set; }
 
         public string ChiTiet { get; set; }
-        public List<ShowVsLoaiVe> DsShowVsLoaiVe { get; set; }
+        public List<ChiTietLoaiVe> DsChiTietLoaiVe { get; set; }
 
     }
 }

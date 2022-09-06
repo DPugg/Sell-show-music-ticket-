@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="./assets/css/style.css">
+<link rel="stylesheet" href="./assets/callAPI/api.js">
+</head>
+
+<body>
+    
+    <div id="header">
+        <!-- begin nav -->
+        <ul id="nav">
+            <li><img class="logo" src="./assets/imgs/logo/logo2.webp"
+                alt=""stylte:{height: 46px;}></li>
+
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./index.html/#tour">Band</a></li>
+            <li><a href="./index.html/#tour">Tour</a></li>
+            <li><a href="./index.html/#contact">Contact</a></li>         
+        </ul>     
+    </div>
+
+    <div class="booking_">
+        <img  src="./assets/imgs/slides/background_3.webp" alt="" width="100%" class="booking_background" >
+        <div class="booking_body" id="booking_body">
+        <!-- <div class="booking_showInfo">
+                <div class="booking_imgShow">
+                    <img src="./assets/imgs/ticket places/DN3.jpg" alt="" width="100%" height="100%">
+                </div>
+                <div class="booking_info">
+                    <div class="booking_TenShow">
+                        Tên Show:
+                    </div>
+                    <div class="booking_DiaDiem">
+                        Địa Điểm: 
+                    </div>
+                    <div class="booking_ngayBieuDien">
+                        Ngày Biểu Diễn:
+                    </div>
+                    <div class="booking_GioiThieu">
+                        BLACKPINK Fandom Name: BLINK BLACKPINK Official Fan Colors: Black &
+                        Pink (Không được công bố chính thức, nhưng được sử dụng chính thức
+                        trên logo và hàng hóa của nhóm) Blackpink (Hangul: 블랙 핑크), viết tắt
+                        là BLACKPINK hoặc BLΛƆKPIИK, là một nhóm nhạc nữ Hàn Quốc được thành
+                        lập bởi YG Entertainment và là nhóm nhạc nữ đầu tiên ra mắt cùng một
+                        công ty giải trí sau 2NE1. Nhóm bao gồm bốn thành viên: Jennie,
+                        Lisa, Jisoo và Rosé. Họ chính thức ra mắt vào ngày 8 tháng 8 năm
+                        2016 với album đơn Square One. Những người hâm mộ Blackpink được gọi
+                        là "Blink". Tên fandom Blink có nghĩa là chúng ta bắt đầu bằng
+                        Blackpink và kết thúc bằng Blackpink. (BL)ACKP(INK)
+                    </div>
+        
+                </div>
+            </div> -->
+    
+            <div class="buy_tickett">
+                <div class="model-contaner">
+                    <div class="js-model-close model-close">
+                        <i class="ti-close"></i>
+                    </div>
+        
+                    <div class="model-header">
+                        <i class="ti-bag"></i> Tickets
+                    </div>
+        
+                    <div class="model-body">
+        
+                        <div class="info-member_block">
+                            <div class="info-member_left">
+                                <div class="model-info">
+                                    <label for=""> <i class="ti-shopping-cart"></i> Loại vé
+                                    </label> <label for="" class="normal_ticket typeTicket"> <input
+                                        type="radio" id="normal" name="choose_ticket" value="100000">
+                                        <label for="NORMAL" class="typeTicket">Vé Thường</label>
+                                    </label> <label for="" class="vip_ticket typeTicket"> <input
+                                        type="radio" id="vip" name="choose_ticket" value="150000">
+                                        <label for="VIP" class="typeTicket">Vé Vip</label>
+                                    </label> <label for="" class="vvip_ticket typeTicket"> <input
+                                        type="radio" id="vvip" name="choose_ticket" value="180000">
+                                        <label for="VVIP" class="typeTicket">Vé VVip</label>
+                                    </label>
+                                </div>
+        
+                                <div class="model-info">
+                                    <label for=""> <i class="ti-money"></i> Giá vé
+                                    </label> <label class="Ticket_price" id="giaVe"></label>
+        
+                                </div>
+                                <div class="model-info">
+                                    <label for=""> <i class="ti-infinite"></i> Số lượng
+                                    </label> <label
+                                        style="color: sienna; padding-left: 40px; padding-right: 40px">
+                                        <input type="radio" name="quantity" id="one" value="1" />1
+                                    </label> <label
+                                        style="color: sienna; padding-left: 40px; padding-right: 40px">
+                                        <input type="radio" name="quantity" id="two" value="2" />2
+                                    </label> <label
+                                        style="color: sienna; padding-left: 40px; padding-right: 40px">
+                                        <input type="radio" name="quantity" id="three" value="3" />3
+                                    </label>
+        
+                                </div>
+                            </div>
+        
+                            
+        
+                            <div class="info-member_right">
+                                <div class="model-info">
+                                    <label><i class="ti-notepad"></i>Chi tiết: </label> <label
+                                        id="details"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <div class="model-info flex-left">
+                                <label for=""> <i class="ti-mobile"></i> SDT
+                                </label> <input id="SDT" type="number" placeholder="SDT?"
+                                    class="model-input">
+                            </div>
+                            <div class="model-info flex-right">
+                                <label for=""> <i class="ti-mobile"></i> Email
+                                </label> <input id="email" type="email" placeholder="Email?"
+                                    class="model-input">
+                            </div>
+        
+                        </div>
+        
+                        <div class="card-info">
+                            <div class="model-info flex-left">
+                                <label for=""> <i class="ti-credit-card"></i> Số tài khoản
+                                </label> <input id="STK" type="number" placeholder="Số tài khoản?"
+                                    class="model-input">
+                            </div>
+                            <div class="model-info flex-right">
+                                <label for=""> <i class="ti-lock"></i> OTP
+                                </label> <input id="PIN" type="password" placeholder="OTP ?"
+                                    class="model-input" >
+                            </div>
+                        </div>
+        
+                        <div class="model-info">
+                            <label for=""> <i class="ti-receipt"></i> Thành Tiền
+                            </label> <label for="" class="cost" id="cost"></label>
+                        </div>
+        
+                        <div class="tbnPay">
+                            <button class="model-pay-btn flex-left" id="getCode">
+                                getCode <i class="ti-lock"></i>
+                            </button>
+                            <button class="model-pay-btn flex-right" id ="pay">
+                                Pay <i class ="ti-check" ></i></button>
+                        </div>
+        
+                    </div>
+        
+                    <div class="model-footer">
+                        <div class="model-help">
+                            Need <a href="">help?</a>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+    
+   
+
+
+
+</body>

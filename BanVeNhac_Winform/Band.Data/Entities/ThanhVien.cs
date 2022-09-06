@@ -24,6 +24,6 @@ namespace Band.Data.Entities
         public string Twitter { get; set; }
         public string TrangThai { get; set; }
         public List<ThanhVienVsVaiTro> DsThanhVienVsVaiTro { set; get; }
-        public List<ThanhVienVsHinhAnh> DsThanhVienVsHinhAnh { set; get; }
+        public List<AnhThanhVien> DsAnhThanhVien { set; get; }
     }
 }

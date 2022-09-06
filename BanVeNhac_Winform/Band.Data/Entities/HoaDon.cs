@@ -13,8 +13,9 @@ namespace Band.Data.Entities
         public int SoLuong { get; set; }
         public string SDT { get; set; }
         public DateTime NgayGiaoDich { get; set; }
-        public int IdShowVsLoaiVe { get; set; }
-        public ShowVsLoaiVe ShowVsLoaiVe { get; set; }
-        public List<Ve> DsVe { set; get; }
+        public KhachHang KhachHang { get; set; }
+        public List<Ve> DsVe  { set; get; }
+        
+
     }
 }

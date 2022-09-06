@@ -16,7 +16,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 
 <body>
@@ -218,7 +218,7 @@
 								class="form-control">
 						</div>
 
-						<input class="form-submit-btn" type="submit" id="testPDF" value="SEND">
+						<input class="form-submit-btn" type="button" id="testPDF" value="SEND" onclick="sendEmail()">
 					</form>
 				</div>
 
@@ -246,22 +246,12 @@
 	<!-- =======================================testAPI=================================== -->
 
 
-
 	<ul id="list-courses">
 
 		<script src="./assets/callAPI/api.js"></script>
 
 
 	</ul>
-
-
-
-
-
-
-
-
-
 
 	<div class="model ">
 		<div class="model-contaner">
@@ -460,9 +450,6 @@
 		</div>
 		
 	</div>
-
-
-
 
 
 	<script>

@@ -8,5 +8,6 @@ namespace Band.ViewModels.Catalog.Show
     {
         public int IdShow { get; set; }
         public List<ChiTietVeViewModel> dsChiTietVe { get; set; }
+
     }
 }

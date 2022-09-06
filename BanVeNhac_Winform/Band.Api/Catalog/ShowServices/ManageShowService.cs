@@ -67,6 +67,7 @@ namespace Band.Api.Catalog.ShowServices
             show.ThoiDiemBieuDien = request.NgayBieuDien.Date.Add(request.GioBieuDien.TimeOfDay);
             show.DsShowVsHinhAnh = new List<ShowVsHinhAnh>();
             show.DsShowVsLoaiVe = new List<ShowVsLoaiVe>();*/
+            
             var show = new Show()
             {
                 DiaDiem = request.DiaDiem,
@@ -74,7 +75,8 @@ namespace Band.Api.Catalog.ShowServices
                 ThoiDiemBieuDien = request.NgayBieuDien.Date.Add(request.GioBieuDien.TimeOfDay),
                 ThoiDiemMoBan = request.NgayMoBan.Date.Add(request.GioMoBan.TimeOfDay),
                 DsShowVsHinhAnh = new List<ShowVsHinhAnh>(),
-                DsShowVsLoaiVe = new List<ShowVsLoaiVe>()
+                DsChiTietLoaiVe = new List<ChiTietLoaiVe>(),
+                IdNhom = 1
             };
             foreach (var img in dsHinhAnh)
             {
@@ -87,15 +89,19 @@ namespace Band.Api.Catalog.ShowServices
             }
             foreach (var vt in request.DsChiTietLoaiVe)
             {
-                ShowVsLoaiVe showVsLoaiVe = new ShowVsLoaiVe()
-                {
-                    Show=show,
-                    IdLoaiVe=vt.IdLoaiVe,
-                    Gia=vt.Gia,
-                    SoLuongBanRa=vt.SoLuongBanRa,
-                    ConLai=vt.SoLuongBanRa
-                };
-                show.DsShowVsLoaiVe.Add(showVsLoaiVe);
+                
+                    ChiTietLoaiVe showVsLoaiVe = new ChiTietLoaiVe()
+                    {
+                        Show = show,
+                        IdLoaiVe = vt.IdLoaiVe,
+                        Gia = vt.Gia,
+                        SoLuongBanRa = vt.SoLuongBanRa,
+                        ConLai = vt.SoLuongBanRa
+                        
+                    };
+                    show.DsChiTietLoaiVe.Add(showVsLoaiVe);
+                
+               
             }
             await _context.HinhAnhDbo.AddRangeAsync(dsHinhAnh);
             await _context.ShowDbo.AddAsync(show);
@@ -104,31 +110,38 @@ namespace Band.Api.Catalog.ShowServices
 
         public async Task<int> Delete(int idShow)
         {
-            var dsHoaDon = await(from sl in _context.ShowVsLoaiVeDbo
-                                 join h in _context.HoaDonDbo on sl.IdShowVsLoaiVe equals h.IdShowVsLoaiVe
+      /*      var dsVe = await(from sl in _context.ShowVsLoaiVeDbo
+                                 join h in _context.VeDbo on sl.IdShowVsLoaiVe equals h.IdShowVsLoaiVe
                                  where sl.IdShow.Equals(idShow)
                                  select sl).ToListAsync();
-            if (dsHoaDon.Count > 0) return -1;
-
-            /*await _context.ThanhVienDbo.FindAsync(thanhVienId);*/
-            var dsShowVsHinhAnhFromDb = await(from s in _context.ShowVsHinhAnhDbo
-                                        where s.IdShow.Equals(idShow)
-                                        select s).ToListAsync();
-            var dsHinhAnhFromDb = new List<HinhAnh>();
-            foreach(var x in dsShowVsHinhAnhFromDb)
+      */
+            var dsVe = await (from sl in _context.VeDbo
+                              join h in _context.ShowVsLoaiVeDbo on sl.IdShowVsLoaiVe equals h.IdShowVsLoaiVe
+                              where h.IdShow.Equals(idShow)
+                              select sl).ToListAsync();
+            if (dsVe.Count > 0) return -1;
+            else
             {
-                dsHinhAnhFromDb.Add(await _context.HinhAnhDbo.FindAsync(x.IdAnh));
+                /*await _context.ThanhVienDbo.FindAsync(thanhVienId);*/
+                var dsShowVsHinhAnhFromDb = await (from s in _context.ShowVsHinhAnhDbo
+                                                   where s.IdShow.Equals(idShow)
+                                                   select s).ToListAsync();
+                var dsHinhAnhFromDb = new List<HinhAnh>();
+                foreach (var x in dsShowVsHinhAnhFromDb)
+                {
+                    dsHinhAnhFromDb.Add(await _context.HinhAnhDbo.FindAsync(x.IdAnh));
+                }
+                var dsChiTietVeFromDb = await (from s in _context.ShowVsLoaiVeDbo
+                                               where s.IdShow.Equals(idShow)
+                                               select s).ToListAsync();
+                var show = await _context.ShowDbo.FindAsync(idShow);
+                /*            if (thanhVien == null) throw*/
+                _context.ShowDbo.Remove(show);
+                _context.ShowVsHinhAnhDbo.RemoveRange(dsShowVsHinhAnhFromDb);
+                _context.HinhAnhDbo.RemoveRange(dsHinhAnhFromDb);
+                _context.ShowVsLoaiVeDbo.RemoveRange(dsChiTietVeFromDb);
+                return await _context.SaveChangesAsync();
             }
-            var dsChiTietVeFromDb= await (from s in _context.ShowVsLoaiVeDbo
-                                          where s.IdShow.Equals(idShow)
-                                          select s).ToListAsync();
-            var show = await _context.ShowDbo.FindAsync(idShow);
-            /*            if (thanhVien == null) throw*/
-            _context.ShowDbo.Remove(show);
-            _context.ShowVsHinhAnhDbo.RemoveRange(dsShowVsHinhAnhFromDb);
-            _context.HinhAnhDbo.RemoveRange(dsHinhAnhFromDb);
-            _context.ShowVsLoaiVeDbo.RemoveRange(dsChiTietVeFromDb);
-            return await _context.SaveChangesAsync();
         }
 
         public List<ShowGetAllViewModel> GetAll()
@@ -186,7 +199,7 @@ namespace Band.Api.Catalog.ShowServices
             var dsChiTietVeFromDb = await(from l in _context.LoaiVeDbo
                                        join sl in _context.ShowVsLoaiVeDbo on l.IdLoaiVe equals sl.IdLoaiVe
                                        where sl.IdShow.Equals(idShow)
-                                       select new { l.IdLoaiVe, sl.Gia, sl.SoLuongBanRa }).ToListAsync();
+                                       select new { l.IdLoaiVe, sl.Gia, sl.SoLuongBanRa, sl.ConLai, sl.IdShowVsLoaiVe }).ToListAsync();
             var dsChiTietVe = new List<ChiTietVeViewModel>();
             foreach (var x in dsChiTietVeFromDb)
             {
@@ -194,7 +207,9 @@ namespace Band.Api.Catalog.ShowServices
                 {
                     IdLoaiVe=x.IdLoaiVe,
                     Gia=x.Gia,
-                    SoLuongBanRa=x.SoLuongBanRa
+                    SoLuongBanRa=x.SoLuongBanRa,
+                    SoLuongConLai = x.ConLai,
+                    IdShowVsLoaiVe = x.IdShowVsLoaiVe
                 });
             }
             /*ShowViewModel showVm = new ShowViewModel();
@@ -232,22 +247,25 @@ namespace Band.Api.Catalog.ShowServices
                                          where sl.IdShow.Equals(request.IdShow)
                                          select sl).ToListAsync();
 
-            foreach(var x in dsShowVsLoaiVe)
+  /*          foreach(var x in dsShowVsLoaiVe)
             {
-                if (_context.HoaDonDbo.Any(hd => hd.IdShowVsLoaiVe == x.IdShowVsLoaiVe)) return -1;
+                if (_context.VeDbo.Any(hd => hd.IdShowVsLoaiVe == x.IdShowVsLoaiVe)) return -1;
             }
-
-            var dsChiTietVe = new List<ShowVsLoaiVe>();
+  */
+            var dsChiTietVe = new List<ChiTietLoaiVe>();
             foreach(var x in request.dsChiTietVe)
             {
-                dsChiTietVe.Add(new ShowVsLoaiVe()
-                {
-                    IdShow = request.IdShow,
-                    Gia = x.Gia,
-                    IdLoaiVe = x.IdLoaiVe,
-                    SoLuongBanRa = x.SoLuongBanRa,
-                    ConLai=x.SoLuongBanRa
-                });
+               
+                    dsChiTietVe.Add(new ChiTietLoaiVe()
+                    {
+                        IdShow = request.IdShow,
+                        Gia = x.Gia,
+                        IdLoaiVe = x.IdLoaiVe,
+                        SoLuongBanRa = x.SoLuongBanRa,
+                        ConLai = x.SoLuongBanRa,
+                        IdShowVsLoaiVe = x.IdShowVsLoaiVe
+                    });
+                
             }
             
             _context.ShowVsLoaiVeDbo.RemoveRange(dsShowVsLoaiVe);

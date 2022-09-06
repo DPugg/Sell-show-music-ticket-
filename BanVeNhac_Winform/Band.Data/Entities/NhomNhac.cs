@@ -23,5 +23,6 @@ namespace Band.Data.Entities
         public string Youtube { get; set; }
 
         public byte[] Logo { get; set; }
+        public List<Show> DsShow { set; get; }
     }
 }

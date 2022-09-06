@@ -15,7 +15,7 @@ html{
     height: 46px;
     top: 0;
     background-color: #111;
-    z-index: 1;
+    z-index: 3;
 }
 
 #nav{
@@ -456,7 +456,7 @@ html{
 
 
 .model-contaner{
-    width: 1200px;
+    width: 1100px;
     background-color: #fff;
     min-height: 150px;
 }
@@ -733,4 +733,64 @@ button.model-pay-btn:hover{
  }   
 .modal_bill-contact{
 	margin-right: 480px;
- }   
+ }
+
+
+ .booking_showInfo{
+    display: flex;
+    margin-top: 120px;
+    width: 100%;
+    margin-bottom: 100px;
+    background-color: white;
+ }
+
+ .booking_imgShow{
+    width: 60%;
+ }
+
+ .booking_info{
+    padding: 20px 0 0 20px;
+    width: 40%;
+ }
+
+ .booking_TenShow{
+    font-size: large;
+    line-height: 24px;
+    padding-bottom: 4px;
+ }
+
+ .booking_DiaDiem{
+    font-size: large;
+    line-height: 24px;
+    padding-bottom: 4px;
+ }
+
+ .booking_ngayBieuDien{
+    font-size: large;
+    line-height: 24px;
+    padding-bottom: 4px;
+ }
+
+ .booking_GioiThieu{
+    font-size: large;
+    line-height: 24px;
+    padding-bottom: 4px;
+ }
+ .booking_body{
+    padding: 0 100px 0 100px ;
+    z-index: 2;
+    position: absolute;
+ }
+
+ .buy-tickett{
+   
+    background-color: rgba(0, 0, 0,0.3);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+ }
+
+ .booking_background{
+    position: fixed;
+    opacity: 0.8;
+ }
