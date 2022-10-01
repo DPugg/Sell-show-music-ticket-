@@ -98,6 +98,7 @@ namespace Band.ManageApp
             this.statiscalDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.statiscalDGV.Size = new System.Drawing.Size(840, 205);
             this.statiscalDGV.TabIndex = 2;
+            this.statiscalDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.statiscalDGV_CellContentClick);
             this.statiscalDGV.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.statiscalDGV_CellValueChanged);
             this.statiscalDGV.SelectionChanged += new System.EventHandler(this.statiscalDGV_SelectionChanged);
             // 

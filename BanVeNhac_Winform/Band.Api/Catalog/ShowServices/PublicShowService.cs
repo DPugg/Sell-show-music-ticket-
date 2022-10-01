@@ -212,7 +212,7 @@ namespace Band.Api.Catalog.ShowServices
             if(STK != null)
             {
                 MaXacNhan = layMaXacNhan();
-                SendMail(request.email, "Mã Xác Nhận", MaXacNhan);
+                SendMail(request.email, "Mã Xác Nhận Đặt Vé BlackPink", MaXacNhan);
                 return 0;
             }
             else return (int)BankErrorCode.UNCORRECT_STK;

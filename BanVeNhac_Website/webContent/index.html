@@ -59,7 +59,7 @@
 				<!-- Kết hợp hình ảnh và nội dung cho mội phần tử trong slideshow-->
 				<div class="mySlides fade">
 					<div class="numbertext">1 / 3</div>
-					<img src="./assets/imgs/slides/slide1.webp" width="100%">
+					<img src="./assets/imgs/slides/slide3_2.jpg" width="100%">
 					<!-- <div class="text">Nội Dung 1</div> -->
 				</div>
 				<div class="mySlides fade">
@@ -69,7 +69,7 @@
 				</div>
 				<div class="mySlides fade">
 					<div class="numbertext">3 / 3</div>
-					<img src="./assets/imgs/slides/slide3_2.jpg" width="100%">
+					<img src="./assets/imgs/slides/slide1.webp" width="100%">
 					<!-- <div class="text">Nội Dung 3</div> -->
 				</div>
 				<!-- Nút điều khiển mũi tên-->
@@ -167,7 +167,7 @@
 				</li>
 			</ul>
 
-			<div class="ticket-place-list" id="ticket-place-list">
+			<div class="ticket-place-list" id="ticket-place-list" >
 				<!-- ========================================= -->
 				<!-- ========================================= -->
 				<!-- =============================hiện đặt vé============ -->
@@ -196,7 +196,7 @@
 					</p>
 					<p>
 						<i class="ti-email contact-info-item"></i>Email: <a
-							href="mailto:mail@mail.com"> mail@mail.com</a>
+							href="mailto:dvphuong1408@mail.com"> dvphuong1408@mail.com</a>
 					</p>
 				</div>
 
@@ -404,6 +404,47 @@
 
 	<div id="name">1.</div>
 
+	<div class="modal-infoShow">
+		<div class="modal-infoShow-container">
+			<div class="js-model-close model-close js-close-ShowInfo">
+				<i class="ti-close"></i>
+			</div>
+			<!-- <img  src="./assets/imgs/slides/background_3.webp" alt="" width="100%" class="booking_background" > -->
+			<div class="booking_showInfo">
+				<div class="booking_imgShow" >
+					<img src="" class="img_placess" id="booking_imgShow" alt="" width="680px" height="500px">
+				</div>
+				<div class="booking_info">
+					<div class="booking_TenShow" id="booking_TenShow">
+						Tên Show:
+					</div>
+					<div class="booking_DiaDiem" id="booking_DiaDiem">
+						Địa Điểm: 
+					</div>
+					<div class="booking_ngayBieuDien" id="booking_ngayBieuDien">
+						Ngày Biểu Diễn:
+					</div>
+					<div class="booking_MoBanVe" id="booking_MoBanVe">
+						Ngày Biểu Diễn:
+					</div>
+					<div class="booking_GioiThieu" id="booking_GioiThieu">
+						BLACKPINK Fandom Name: BLINK BLACKPINK Official Fan Colors: Black &
+						Pink (Không được công bố chính thức, nhưng được sử dụng chính thức
+						trên logo và hàng hóa của nhóm) Blackpink (Hangul: 블랙 핑크), viết tắt
+						là BLACKPINK hoặc BLΛƆKPIИK, là một nhóm nhạc nữ Hàn Quốc được thành
+						lập bởi YG Entertainment và là nhóm nhạc nữ đầu tiên ra mắt cùng một
+						công ty giải trí sau 2NE1. Nhóm bao gồm bốn thành viên: Jennie,
+						Lisa, Jisoo và Rosé. Họ chính thức ra mắt vào ngày 8 tháng 8 năm
+						2016 với album đơn Square One. Những người hâm mộ Blackpink được gọi
+						là "Blink". Tên fandom Blink có nghĩa là chúng ta bắt đầu bằng
+						Blackpink và kết thúc bằng Blackpink. (BL)ACKP(INK)
+					</div>
+		
+				</div>
+			</div> 
+		</div>
+	</div>
+
 	<div class="modal_bill " >
 
 		<div class="modal_bill-container" id="Bill">
@@ -450,6 +491,27 @@
 		</div>
 		
 	</div>
+
+	<!-- <script type="text/javascript">
+		$(document).ready(function() {
+			$('body').on('click','#getCode', function() {
+			var vnf_regex = /((09|03|07|08|05|02|01|04)+([0-9]{8})\b)/g;
+			var mobile = $('#SDT').val();
+			if(mobile !==''){
+				if (vnf_regex.test(mobile) == false) 
+				{
+					alert('Số điện thoại của bạn không đúng định dạng!');
+				}
+			}else{
+				alert('Bạn chưa điền số điện thoại!');
+			}
+			});
+		});
+		var stk = document.getElementById("STK");
+		if(stk.length < 10){
+			alert("số tài khoản không hợp lệ");
+		}
+	</script> -->
 
 
 	<script>
@@ -621,6 +683,7 @@
 
 	</div>
 
-
+	
+	
 </body>
 </html>

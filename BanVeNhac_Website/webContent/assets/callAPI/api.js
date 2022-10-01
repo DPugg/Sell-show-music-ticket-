@@ -61,9 +61,45 @@ function sendEmail(){
 		Subject : "This is the subject",
 		Body : "And this is the body"
 	}).then(
-	  message => alert(message)
+	//   message => alert(message)
 	);
 
+}
+
+function showInfo_click(clicked_id){
+	IdShow = document.getElementById(clicked_id).id;
+    console.log(clicked_id + "..........."+ IdShow);
+	console.log(clicked_id);
+	const model_show = document.querySelector('.modal-infoShow')
+
+	model_show.classList.add('openModel')
+	var url = new URL('https://localhost:44315/api/show/byid')
+
+    var params = {idShow: clicked_id} 
+    
+    url.search = new URLSearchParams(params).toString();
+
+	console.log(url);
+    fetch(url)
+    .then(response => response.json())
+      .then(member => {
+		console.log(member);
+		// document.getElementById("img_placess").src = `data:image/png;base64, ${member.hinhAnh}`;
+		 document.getElementById("booking_imgShow").src = `data:image/png;base64, ${member.hinhAnh}`;
+
+		document.getElementById('booking_TenShow').innerHTML="Tên show: "+member.tenShow;
+		document.getElementById('booking_DiaDiem').innerHTML="Địa điểm: "+member.diaDiem;
+		document.getElementById('booking_ngayBieuDien').innerHTML="Ngày biểu diễn: "+member.thoiDiemBieuDien;
+		document.getElementById('booking_MoBanVe').innerHTML="Thời gian bán vé: "+member.thoiDiemMoBan;
+		
+		document.getElementById('booking_GioiThieu').innerHTML="Blackpink (Hangul: 블랙 핑크), viết tắt là BLACKPINK hoặc BLΛƆKPIИK, là một nhóm nhạc nữ Hàn Quốc được thành lập bởi YG Entertainment và là nhóm nhạc nữ đầu tiên ra mắt cùng một công ty giải trí sau 2NE1. Nhóm bao gồm bốn thành viên: Jennie, Lisa, Jisoo và Rosé. Họ chính thức ra mắt vào ngày 8 tháng 8 năm 2016 với album đơn Square One. Những người hâm mộ Blackpink được gọi là Blink. Tên fandom Blink có nghĩa là chúng ta bắt đầu bằng Blackpink và kết thúc bằng Blackpink.";
+
+
+	  })
+       .catch((error) => {
+         console.error('Error:', error);
+       });
+			 				 
 }
 
 
@@ -73,7 +109,6 @@ function reply_click(clicked_id)
     console.log(clicked_id + "..........."+ IdShow);
 
  //====================================hien ds ve====================================
-
 
 	console.log(clicked_id);
 	var url = new URL('https://localhost:44315/api/show/byid')
@@ -88,43 +123,10 @@ function reply_click(clicked_id)
     .then(response => response.json())
       .then(member => {
 //		console.log(member.dsChiTietLoaiVe)
-		dsCTLoaiVe = member.dsChiTietLoaiVe;
+		dsCTLoaiVe = member.dsChiTietLoaiVe;	
 		console.log("IdShow: "+ IdShow + " dsCTLoaiVe: "+dsCTLoaiVe)
 
-//================mo page booking======================
-				
-		var showPlaceMember = document.querySelector(".booking_body")
-		var htmlsPlace = membersTv.map(function(showMember) {
-			return
-			 `
-			<div class="booking_showInfo">
-				<div class="booking_imgShow">
-					<img src="data:image/png;base64,${showMember.hinhAnh}" alt="" width="100%" height="100%">
-				</div>
-				<div class="booking_info">
-					<div class="booking_TenShow">
-						Tên Show: ${showMember.tenShow}
-					</div>
-					<div class="booking_DiaDiem">
-						Địa Điểm: ${showMember.diaDiem}
-					</div>
-					<div class="booking_ngayBieuDien">
-						Ngày Biểu Diễn: ${showMember.thoiDiemBieuDien}
-					</div>
-					<div class="booking_GioiThieu">
-						
-					</div>
-		
-				</div>
-			</div>
-		  `;
-		
-		});
-		showPlaceMember.innerHTML = htmlsPlace.join('');
-
 	  })
-		
-
        .catch((error) => {
          console.error('Error:', error);
        });
@@ -132,14 +134,6 @@ function reply_click(clicked_id)
   }
 
   
-
-
- //====================================hien ds thanh vien====================================
-//====================================hien ds thanh vien====================================
- //====================================hien ds thanh vien====================================
-//====================================hien ds thanh vien====================================
- //====================================hien ds thanh vien====================================
-//====================================hien ds thanh vien====================================
  //====================================hien ds thanh vien====================================
 //====================================hien ds thanh vien====================================
 
@@ -193,49 +187,49 @@ function memberInfor(clicked_id) {
 
       .catch((error) => {
         console.error('Error:', error);
-      });
-	
-	
+      });		
 }
 
-	function renderMembersTv(membersTv) {
-		var memberInfoTv = document.querySelector('#member-list');
-
-		var htmlsTv = membersTv.map(function(memberTv) {
-			
-
-				return `
-      			<div class="member-item" id=${memberTv.idThanhVien} onClick="memberInfor(this.id)">
-
-					<img class="member-img" src="data:image/png;base64,${memberTv.avatar}"
-						alt="member imgage">
-					<div class="member-name">
-						${memberTv.ngheDanh}
-						
-					</div>
+function renderMembersTv(membersTv) {
+	var memberInfoTv = document.querySelector('#member-list');
+	var htmlsTv = membersTv.map(function(memberTv) {	
+		return `
+      		<div class="member-item" id=${memberTv.idThanhVien} onClick="memberInfor(this.id)">
+				<img class="member-img" src="data:image/png;base64,${memberTv.avatar}"
+					alt="member imgage">
+				<div class="member-name">
+					${memberTv.ngheDanh}		
 				</div>
-      		`;
-			
+			</div>
+      		`;	
 		});
 		memberInfoTv.innerHTML = htmlsTv.join('');
-//========================================use modal====================================
-//========================================use modal====================================
-//========================================use modal====================================
-
-		
-		
+	//========================================use modal====================================
+	//========================================use modal====================================
+	//========================================use modal====================================
 		
          const buyBtns = document.querySelectorAll('.buy-ticket')
          const model = document.querySelector('.model')
          
        	 const show_Members_infor = document.querySelectorAll('.member-item')
          const model_member = document.querySelector('.model_member_infor')
+
+		 const show_infors = document.querySelectorAll('.ticket-img')
+         const model_show = document.querySelector('.modal-infoShow')
          
          const modal_bill = document.querySelector('.modal_bill')
          
          const modelClose = document.querySelector('.js-model-close')
          const closeTest = document.querySelector('.js-close-memberInfo')
          const modalClose = document.querySelector('.js-close-Bill')
+		 const modalClosee = document.querySelector('.js-close-ShowInfo')
+
+		function showPlaceInfo(){
+			model_show.classList.add('openModel')
+		}
+		function hidePlaceInfo(){
+			model_show.classList.remove('openModel')
+		}
 
          //ham hien phan mua ve (them class openModel vao the model)
          function showBuyTicket(){
@@ -247,9 +241,9 @@ function memberInfor(clicked_id) {
              model_member.classList.add('openModel')
              
          }
- //        function showBill(){
- //       	 modal_bill.classList.add('openModel')
-  //       }      
+         function showBill(){
+        	 modal_bill.classList.add('openModel')
+         }      
          //ham an pham mua ve (xoa class openModel di)
          function hideBuyTicket(){
              model.classList.remove('openModel')
@@ -264,6 +258,10 @@ function memberInfor(clicked_id) {
          }
          
          //lap qua tung the button va lang nghe su kien click
+		 for(const show_infor of show_infors){
+			show_infor.addEventListener('click', showPlaceInfo)
+			console.log("mở thong tin show")
+		 }
   
          
          for(const buyBtn of buyBtns){
@@ -275,14 +273,12 @@ function memberInfor(clicked_id) {
          }
 
          //nghe hanh vi click vao button close
+
          closeTest.addEventListener('click', hideMember_infor);
          modelClose.addEventListener('click', hideBuyTicket);
          modalClose.addEventListener('click',  hide_bill);
-         
-
-
-         
-	}
+		 modalClosee.addEventListener('click', hidePlaceInfo);
+}
 
 
 
@@ -306,29 +302,23 @@ function memberInfor(clicked_id) {
 
 	function renderMembers(members) {
 		var memberInfo = document.querySelector('#ticket-place-list');
-
 		var htmls = members.map(function(member) {
 
-
 				return `
-      			<div class="ticket-place-item" >
-					<img class="ticket-img" id="show-img" src="data:image/png;base64,${member.hinhAnh}"
+      			<div class="ticket-place-item" id="${member.idShow}" >
+					<img class="ticket-img" id="show-img" onclick="showInfo_click(${member.idShow})" src="data:image/png;base64,${member.hinhAnh}"
 						alt="img place of show">
 					<div class="content-ticket">
 						<p class="name">Concept: ${member.tenShow}</p>
 						<p class="time" id="show-time">Thời điểm mở bán: ${member.thoiDiemMoBan}</p>
 						
 						<p class="describe">Địa Điểm: ${member.diaDiem}</p>
-						<button class="buy-ticket" id="${member.idShow}" name="1" >
-							
-							<a onClick="reply_click(${member.idShow})" href="./booking.html" width: 20px height: 10px>Buy Tickets</a>
+						<button class="buy-ticket" id="${member.idShow}" name="1" onClick="reply_click(${member.idShow})">
+							Buy Tickets
 						</button>
 					</div>
 				</div>
-      		`;
-			
-		
-			
+      		`;		
 		});
 		
 
@@ -407,7 +397,31 @@ var btnPay = document.getElementById('pay');
 									alert("xin kiếm tra lại thông tin vé");
 									return;
 								}
+								
+								var vnf_regex = /((09|03|07|08|05|02|01|04)+([0-9]{8})\b)/g;
+								var mobile = $('#SDT').val();
+								if(mobile !==''){
+									if (vnf_regex.test(mobile) == false) 
+									{
+										alert('Số điện thoại của bạn không đúng định dạng!');
+										return;
+									}
+								}else{
+									alert('Bạn chưa điền số điện thoại!');
+									return;
+								}
+																									
+								if(stk.length < 10){
+									alert("số tài khoản không hợp lệ");
+									return;
+								}
 
+								var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+								if(!email.match(mailformat))
+								{
+									alert("xin nhập email");
+									return;
+								}
 								
 
 								
@@ -510,17 +524,17 @@ document.getElementById('pay').onclick= function(){
 				showBillInfo(data);
 
 
-				Email.send({
-					Host : "smtp.yourisp.com",
-					Username : "n18dccn157@student.ptithcm.edu.vn",
-					Password : "n18dccn157#140800",
-					To : email,
-					From : "n18dccn157@student.ptithcm.edu.vn",
-					Subject : "concert Bill",
-					Body : "And this is the body"
-				}).then(
-				  message => alert(message)
-				);
+				// Email.send({
+				// 	Host : "smtp.yourisp.com",
+				// 	Username : "n18dccn157@student.ptithcm.edu.vn",
+				// 	Password : "n18dccn157#140800",
+				// 	To : email,
+				// 	From : "n18dccn157@student.ptithcm.edu.vn",
+				// 	Subject : "concert Bill",
+				// 	Body : "And this is the body"
+				// }).then(
+				//   message => alert(message)
+				// );
 				
 			}
 			else if(data == -1){

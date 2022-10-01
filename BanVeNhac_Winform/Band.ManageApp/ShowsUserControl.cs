@@ -456,13 +456,12 @@ namespace Band.ManageApp
                 locationTxtBox.Focus();
                 return;
             }
-            if (saleDateBox.Value >= performDatebox.Value.AddDays(-1))
+            if (saleDateBox.Value >= performDatebox.Value.AddDays(-2))
             {
-                if (saleTimeBox.Value >= performTimeBox.Value)
-                {
+               
                     MessageBox.Show("Thời gian mở bán vé phải nhỏ hơn ngày biểu diễn!");
                     return;
-                }
+                
             }
             
             var showInfoUpdateRequest = new ShowInfoUpdateRequest()
@@ -638,7 +637,7 @@ namespace Band.ManageApp
                 locationTxtBox.Focus();
                 return;
             }
-            if (saleDateBox.Value >= performDatebox.Value.AddDays(-1))
+            if (saleDateBox.Value >= performDatebox.Value.AddDays(-2))
             {
                 MessageBox.Show("Thời gian mở bán vé phải nhỏ hơn ngày biểu diễn!");
                 return;
@@ -827,11 +826,11 @@ namespace Band.ManageApp
                     
                 if (_showsApiClient.UpdateTicketInfor(request))
                 {
-                    MessageBox.Show("Thành công!  IdShow" + request.IdShow + " ds ve: "+request.dsChiTietVe);
+                    MessageBox.Show("Thành công!");
 
                     saveBtn.Visible = false;
                 }
-                else MessageBox.Show("Thất bại! IdShow" + request.IdShow + " ds ve: " + request.dsChiTietVe);
+                else MessageBox.Show("Thất bại! ");
             }
         }
 

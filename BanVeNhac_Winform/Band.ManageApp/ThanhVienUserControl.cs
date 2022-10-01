@@ -35,6 +35,7 @@ namespace Band.ManageApp
         public event EventHandler AvatarChanged;
         public event EventHandler CoverChanged;
         public static ActionType _actionType;
+       
 
         public static List<ThanhVienViewModel> dsThanhVien { set; get; }
         protected virtual void OnAvatarChanged()
@@ -210,14 +211,18 @@ namespace Band.ManageApp
                     index++;
                 }
 
+               
+
                 //Tạo request
                 ThanhVienGetAllViewModel tmp = thanhVienCombobox.SelectedValue as ThanhVienGetAllViewModel;
+                
                 var request = new ThanhVienUpdatePositionRequest()
                 {
                     IdThanhVien = tmp.IdThanhVien,
                     DsIdVaiTro = dsIdVaiTro,
                     DsVaiTroMoi = dsVaiTroMoi
                 };
+               
                 var response = _thanhVienApiClient.UpdatePosition(request);
                 if (response)
                 {
@@ -263,7 +268,8 @@ namespace Band.ManageApp
                     TenKhaiSinh=nameTxtBox.Text,
                     TieuSu=storyTxtBox.Text,
                     Twitter=twitterTxtBox.Text,
-                    TrangThai = txtHoatDong.Text
+                 //   TrangThai = hdCombobox.Text
+                    TrangThai = "Hoạt động"
                 };
                 var response = _thanhVienApiClient.UpdateThanhVien(request);
                 if (response)
@@ -355,6 +361,8 @@ namespace Band.ManageApp
                         dsVaiTroMoi.Add(x.TenVaiTro);
                     }
 
+                
+
                 //Tạo request
                 var request = new ThanhVienCreateRequest()
                 {
@@ -366,6 +374,7 @@ namespace Band.ManageApp
                     Instagram = instaTxtBox.Text,
                     Twitter = twitterTxtBox.Text,
                     TieuSu = storyTxtBox.Text,
+                //    TrangThai = hdCombobox.Items.IndexOf(0).ToString(),
                     TrangThai = "Hoạt động",
                     DsAvatar = byteAvatarList,
                     DsCover = byteCoverList,
@@ -532,6 +541,8 @@ namespace Band.ManageApp
                     dsVaiTroLbl.Items.Add(x.TenVaiTro);
                 }
 
+
+
                 //Binding
                 nameTxtBox.Text = thanhVien.TenKhaiSinh;
                 dobBox.Value = thanhVien.NgaySinh;
@@ -541,6 +552,7 @@ namespace Band.ManageApp
                 instaTxtBox.Text = thanhVien.Instagram;
                 twitterTxtBox.Text = thanhVien.Twitter;
                 storyTxtBox.Text = thanhVien.TieuSu;
+             //   hdCombobox.Text = thanhVien.TrangThai;
                 txtHoatDong.Text = thanhVien.TrangThai;
             }
             _actionType = ActionType.READ;
@@ -711,6 +723,8 @@ namespace Band.ManageApp
                 return;
             }
 
+           
+
             var thanhVienGetAllVm = new ThanhVienGetAllViewModel();
             thanhVienGetAllVm = thanhVienCombobox.SelectedValue as ThanhVienGetAllViewModel;
 
@@ -726,9 +740,10 @@ namespace Band.ManageApp
                 TenKhaiSinh = nameTxtBox.Text,
                 TieuSu = storyTxtBox.Text,
                 Twitter = twitterTxtBox.Text,
+             //   TrangThai = hdCombobox.Items.IndexOf(1).ToString()
                 TrangThai = "Ngưng hoạt động"
             };
-            if (MessageBox.Show($"Xoá khỏi nhóm thành viên {thanhVienGetAllVm.NgheDanh}",
+            if (MessageBox.Show($"Xoá khỏi nhóm thành viên {thanhVienGetAllVm.NgheDanh} ",
                        "Xoá thành viên",
                         MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -805,6 +820,21 @@ namespace Band.ManageApp
         }
 
         private void txtHoatDong_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void thanhVienCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void avatarImgBox_Click(object sender, EventArgs e)
         {
 
         }

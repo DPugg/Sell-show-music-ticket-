@@ -36,6 +36,8 @@ namespace Band.ManageApp
             this.avatarImgBox = new System.Windows.Forms.PictureBox();
             this.coverImgBox = new System.Windows.Forms.PictureBox();
             this.leftInfoPnl = new System.Windows.Forms.Panel();
+            this.txtHoatDong = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nationTxtBox = new System.Windows.Forms.TextBox();
@@ -67,8 +69,6 @@ namespace Band.ManageApp
             this.deleteBtn = new System.Windows.Forms.PictureBox();
             this.thanhVienCombobox = new System.Windows.Forms.ComboBox();
             this.infoPnl = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtHoatDong = new System.Windows.Forms.TextBox();
             this.imgPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.editCoverImgBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.editAvatarBtn)).BeginInit();
@@ -163,6 +163,24 @@ namespace Band.ManageApp
             this.leftInfoPnl.Name = "leftInfoPnl";
             this.leftInfoPnl.Size = new System.Drawing.Size(263, 297);
             this.leftInfoPnl.TabIndex = 1;
+            // 
+            // txtHoatDong
+            // 
+            this.txtHoatDong.Location = new System.Drawing.Point(81, 136);
+            this.txtHoatDong.Name = "txtHoatDong";
+            this.txtHoatDong.Size = new System.Drawing.Size(100, 23);
+            this.txtHoatDong.TabIndex = 10;
+            this.txtHoatDong.TextChanged += new System.EventHandler(this.txtHoatDong_TextChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 135);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 15);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Hoạt động";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label11
             // 
@@ -458,6 +476,7 @@ namespace Band.ManageApp
             this.thanhVienCombobox.Name = "thanhVienCombobox";
             this.thanhVienCombobox.Size = new System.Drawing.Size(151, 23);
             this.thanhVienCombobox.TabIndex = 4;
+            this.thanhVienCombobox.SelectedIndexChanged += new System.EventHandler(this.thanhVienCombobox_SelectedIndexChanged);
             this.thanhVienCombobox.SelectedValueChanged += new System.EventHandler(this.thanhVienCombobox_SelectedValueChanged);
             // 
             // infoPnl
@@ -469,24 +488,6 @@ namespace Band.ManageApp
             this.infoPnl.Name = "infoPnl";
             this.infoPnl.Size = new System.Drawing.Size(890, 308);
             this.infoPnl.TabIndex = 4;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 135);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(64, 15);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "Hoạt động";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
-            // 
-            // txtHoatDong
-            // 
-            this.txtHoatDong.Location = new System.Drawing.Point(81, 136);
-            this.txtHoatDong.Name = "txtHoatDong";
-            this.txtHoatDong.Size = new System.Drawing.Size(100, 23);
-            this.txtHoatDong.TabIndex = 10;
-            this.txtHoatDong.TextChanged += new System.EventHandler(this.txtHoatDong_TextChanged);
             // 
             // ThanhVienUserControl
             // 
@@ -565,5 +566,6 @@ namespace Band.ManageApp
         private System.Windows.Forms.PictureBox addVaiTroBtn;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtHoatDong;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

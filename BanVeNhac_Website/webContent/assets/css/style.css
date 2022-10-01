@@ -318,6 +318,7 @@ html{
     overflow: hidden;
     margin-left: -8px;
     margin-right: -8px;
+    
 }
 
 #tour .ticket-place-item{
@@ -331,6 +332,7 @@ html{
     width: 100%;
     height: 198px;
     border-radius: 1px;
+    cursor: pointer;
 }
 
 #tour .content-ticket{
@@ -364,6 +366,7 @@ html{
     cursor: pointer;
     font-size: 15px;
     border: 1px solid #757575;
+    z-index: 3;
 }
 
 #tour .buy-ticket:hover{
@@ -644,16 +647,33 @@ button.model-pay-btn:hover{
    
 }
 
-
 .profile_info_contact{
     padding-top: 12px;
    
   
 }
 
-
 .model_member-footer{
     height: 16px;
+}
+
+.modal-infoShow{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0,0.3);
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.modal-infoShow-container{
+    width: 1200px;
+    background-color: #fff;
+    min-height: 200px;
+    padding: 0 8px;
 }
 
 
@@ -738,9 +758,7 @@ button.model-pay-btn:hover{
 
  .booking_showInfo{
     display: flex;
-    margin-top: 120px;
     width: 100%;
-    margin-bottom: 100px;
     background-color: white;
  }
 
@@ -756,25 +774,31 @@ button.model-pay-btn:hover{
  .booking_TenShow{
     font-size: large;
     line-height: 24px;
-    padding-bottom: 4px;
+    padding-bottom: 6px;
  }
 
  .booking_DiaDiem{
     font-size: large;
     line-height: 24px;
-    padding-bottom: 4px;
+    padding-bottom: 6px;
+ }
+
+ .booking_MoBanVe{
+    font-size: large;
+    line-height: 24px;
+    padding-bottom: 6px;
  }
 
  .booking_ngayBieuDien{
     font-size: large;
     line-height: 24px;
-    padding-bottom: 4px;
+    padding-bottom: 6px;
  }
 
  .booking_GioiThieu{
     font-size: large;
     line-height: 24px;
-    padding-bottom: 4px;
+    padding-bottom: 6px;
  }
  .booking_body{
     padding: 0 100px 0 100px ;
